@@ -1,5 +1,3 @@
-
-
 import mongoose, { Schema, Document } from 'mongoose';
 
 // TypeScript interface for a project
@@ -8,6 +6,7 @@ export interface Project extends Document {
   description: string;
   tags?: string[];
   projectLink: string;
+  image?:string;
 }
 
 // Mongoose schema for projects
@@ -29,6 +28,10 @@ const ProjectSchema: Schema<Project> = new mongoose.Schema({
   projectLink: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String,
+    default: '',
   }
 });
 
