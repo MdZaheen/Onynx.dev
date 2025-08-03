@@ -3,27 +3,26 @@ import dbConnect from '@/app/lib/dbconnect';
 import ReviewModel from '@/models/reviews.model';
 
 
-export async function POST(req:NextRequest,res:NextResponse){
+export async function POST(req:NextRequest){
     const db = await dbConnect();
 
-    const {title,description,rating,projectId} = await req.json();
+    const {username,review,rating,} = await req.json();
     try {
-        if(!title || !description || !rating || !projectId){
+        if(!review || !rating){
             return NextResponse.json(
-                { error: 'Title, description, rating, and projectId are required' },
+                { error: 'username, review, and rating are required' },
                 { status: 400 }
             );
         }
-        const review = await ReviewModel.create({
-            title,
-            description,
+        const newReview = await ReviewModel.create({
+            username,
+            review,
             rating,
-            projectId,
         });
-        await review.save();
-        console.log('Review created:', review);
+        await newReview.save();
+        console.log('Review created:', newReview);
         return NextResponse.json(
-            { review },
+            { newReview },
             { status: 201 }
         );
         

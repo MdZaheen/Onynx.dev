@@ -3,9 +3,9 @@ import mongoose, { Schema, Document } from 'mongoose';
 
 export interface User extends Document {
   username?: string;
-  stars: number;
+  rating: number;
   review: string;
-  date: Date;
+  date?: Date;
 }
 
 // Updated User schema
@@ -17,7 +17,7 @@ const ReviewsSchema = new mongoose.Schema({
       return `User-${Date.now()}`;
     }
  },
- stars:{
+ rating:{
     type:Number,
     required:true,
     min:0,
