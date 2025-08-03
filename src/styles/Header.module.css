@@ -1,28 +1,42 @@
-.navbar {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  width: 100%;
-  z-index: 1200;
-  padding: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-}
-
-/* Scrolled state for sticky navbar */
-.scrolled {
-  position: fixed;
+.header {
+  position: sticky;
   top: 0;
-  left: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: transparent;
+  width: 100%;
+  z-index: 1000;
   transition: all 0.3s ease;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000;
 }
 
-.navList::before {
+.scrolled {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  padding: 0.5rem 1.5rem;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 800px;
+  /* Glassmorphism effect for the entire container */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 0 5px rgba(255, 255, 255, 0.1);
+  border-radius: 11px;
+}
+
+.container::before {
   content: '';
   position: absolute;
   top: 0;
@@ -32,7 +46,7 @@
   background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
 }
 
-.navList::after {
+.container::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -42,22 +56,52 @@
   background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
 }
 
+.logo {
+  font-family: 'MARTI', sans-serif;
+  font-size: 1.8rem;
+  color: #A10000;
+  z-index: 10;
+  flex-shrink: 0;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #ff3333;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.8rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .navList {
   display: flex;
   list-style: none;
   gap: 1.5rem;
   justify-content: center;
-  padding: 0.5rem 1.5rem;
-  max-width: 500px;
-  /* Enhanced glassmorphism effect */
-  background: rgba(20, 20, 20, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(255, 255, 255, 0.05);
-  border-radius: 25px;
-  position: relative;
-  transition: all 0.3s ease;
 }
 
 .navItem {
@@ -74,6 +118,9 @@
   transition: all 0.3s ease;
   display: block;
   text-transform: capitalize;
+}
+
+.navLink {
   position: relative;
   overflow: hidden;
 }
@@ -98,26 +145,6 @@
 
 .navLink:hover::after {
   width: 80%;
-}
-
-.active {
-  position: relative;
-}
-
-.active::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(90deg, #ff0000, #A10000);
-  transform: translateX(-50%);
-}
-
-.navLink.active:hover {
-  color: #ff3333;
-  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
 }
 
 /* Menu Button Styles */
@@ -161,22 +188,18 @@
 
 /* Media Queries */
 @media (max-width: 768px) {
-  .navbar {
-    padding-top: 0;
-    position: absolute;
-    top: 10px;
+  .header {
+    flex-direction: row;
+    padding: 1rem 1rem;
+    align-items: center;
+    justify-content: space-between;
   }
-
-  .navbar.scrolled {
-    position: fixed;
-    top: 0;
-  }
-
+  
   .menuButton {
     display: flex;
   }
-
-  .navList {
+  
+  .container {
     position: fixed;
     top: 0;
     left: 0;
@@ -198,42 +221,56 @@
     border-radius: 0;
     margin: 0;
     padding: 2rem;
-    max-width: none;
   }
-
-  .navList.menuOpen {
+  
+  .container.menuOpen {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
   }
-
+  
+  .logo {
+    margin-bottom: 0;
+  }
+  
   .navList {
     flex-direction: column;
     gap: 1.5rem;
     align-items: center;
   }
-
+  
   .navLink {
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
   }
+  
+  /* Tagline will be handled by its own media query in Tagline.module.css */
+  /* It will be positioned to the right of the logo on mobile */
 }
 
 @media (max-width: 480px) {
+  .header {
+    padding: 0.8rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
   .navList {
     gap: 1.2rem;
   }
-
+  
   .navLink {
     padding: 0.6rem 1rem;
     font-size: 1.1rem;
   }
-
+  
   .menuButton {
     width: 25px;
     height: 18px;
   }
-
+  
   .menuButton span {
     height: 2px;
   }
