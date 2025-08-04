@@ -1,67 +1,85 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import styles from '../styles/Navbar.module.css';
-import Tagline from './Tagline';
+import styles from '@/styles/Navbar.module.css';
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  }, []);
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.logo}>
-        <Link href="/">ONYXDEV</Link>
-      </div>
-      
-      <button 
-        className={`${styles.menuButton} ${menuOpen ? styles.active : ''}`} 
-        onClick={toggleMenu}
+    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+      <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
+        <li className={styles.navItem}>
+          <Link 
+            href="/Home" 
+            className={`${styles.navLink} ${pathname === '/Home' ? styles.active : ''}`} 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Home
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link 
+            href="/about" 
+            className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`} 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            About&nbsp;Us
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link 
+            href="/projects" 
+            className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`} 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Projects
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link 
+            href="/contact" 
+            className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Contact
+          </Link>
+        </li>
+      </ul>
+      <button
+        className={`${styles.menuButton} ${isMenuOpen ? styles.active : ''}`}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label="Toggle menu"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
-      
-      <div className={`${styles.container} ${menuOpen ? styles.menuOpen : ''}`}>
-        <nav className={styles.navbar}>
-          <ul className={styles.navList}>
-            <li className={styles.navItem}>
-              <Link href="/" className={styles.navLink} onClick={() => setMenuOpen(false)}>Home</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/about" className={styles.navLink} onClick={() => setMenuOpen(false)}>About us</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/projects" className={styles.navLink} onClick={() => setMenuOpen(false)}>Projects</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/contact" className={styles.navLink} onClick={() => setMenuOpen(false)}>Contact</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <Tagline />
-    </header>
+    </nav>
   );
-};
-
-export default Navbar;
+}
