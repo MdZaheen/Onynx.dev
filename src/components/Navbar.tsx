@@ -36,8 +36,8 @@ export default function Navbar() {
       <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
         <li className={styles.navItem}>
           <Link 
-            href="/home" 
-            className={`${styles.navLink} ${pathname === '/home' ? styles.active : ''}`} 
+            href="/Home" 
+            className={`${styles.navLink} ${pathname === '/Home' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
             Home
