@@ -87,9 +87,19 @@ const Tagline = () => {
 
   return (
     <div className={styles.taglineContainer}>
-      <p className={styles.designedText}>// Designed</p>
-      <p className={styles.inDarkText}>in Darkness //</p>
-      <p className={styles.timeText}>{renderStylizedTime()}</p>
+      <div className={styles.taglineText}>
+        <div>
+          <span className={styles.slashRed}>//</span>
+          <span className={styles.designedText}> Designed</span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div>
+            <span className={styles.inDarkText}>in Darkness</span>
+            <span className={styles.slashWhite}> //</span>
+          </div>
+          <div className={styles.timeText}>{renderStylizedTime()}</div>
+        </div>
+      </div>
     </div>
   );
 };
