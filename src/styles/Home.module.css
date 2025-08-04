@@ -18,6 +18,63 @@
   width: 100%;
   max-width: 1200px;
   margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 10;
+}
+
+.mainText {
+  margin-top: 4rem;
+}
+
+.mainText h1 {
+  font-family: var(--font-lexend);
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.mainText p {
+  font-family: var(--font-lexend);
+  font-size: 12px;
+  font-weight: 200;
+  color: #666666;
+}
+
+.terminalText {
+  font-family: monospace;
+  font-size: 1.1rem;
+  color: #00ff00;
+  line-height: 1.5;
+}
+
+.eleganceText {
+  font-family: var(--font-lexend-giga);
+  font-size: 14px;
+  color: #ffffff;
+  text-transform: lowercase;
+  opacity: 0.8;
+  text-align: center;
+  width: 100%;
+}
+
+.creativeCoders {
+  margin-top: auto;
+}
+
+.creativeCoders h2 {
+  font-family: 'MARTI', sans-serif;
+  font-size: 2rem;
+  color: #A10000;
+  margin-bottom: 0.5rem;
+}
+
+.creativeCoders p {
+  font-family: monospace;
+  font-size: 1rem;
+  color: #666666;
 }
 
 .logo {
@@ -36,6 +93,33 @@
   color: #ff3333;
 }
 
+.samuraiImageContainer {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.samuraiImage {
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: blur(1.5px) saturate(0.7) drop-shadow(0 0 10px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 15px rgba(0, 0, 0, 0.6));
+  transition: all 0.5s ease;
+}
+
+.samuraiImage:hover {
+  filter: blur(1px) saturate(0.75) drop-shadow(0 0 15px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 20px rgba(0, 0, 0, 0.7));
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
@@ -43,6 +127,11 @@
   
   .logo {
     font-size: 1.6rem;
+  }
+  
+  .samuraiImageContainer {
+    width: 85%;
+    height: 75vh;
   }
 }
 
@@ -53,5 +142,10 @@
   
   .logo {
     font-size: 1.5rem;
+  }
+  
+  .samuraiImageContainer {
+    width: 90%;
+    height: 70vh;
   }
 }
