@@ -1,8 +1,10 @@
 'use client'
 import React, { useState, useRef } from 'react'
-import '../styles/About.css'
-import TeamNameFlipper from './ui/team-name-flipper'
-import { TextScroll } from '../components/ui/text-scroll'
+import '@/styles/About.css'
+import Navbar from '@/components/Navbar'
+
+import TeamNameFlipper from '@/components/ui/team-name-flipper'
+// import { TextScroll } from '../components/ui/text-scroll'
 
 const About = () => {
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
@@ -57,6 +59,7 @@ const About = () => {
     const data = memberData[activeMember as keyof typeof memberData]
 
     return (
+
       <div
         className="team-info"
         style={{
@@ -73,7 +76,10 @@ const About = () => {
   }
 
   return (
+  
     <div className="about-container">
+        <Navbar />
+
       {/* ✅ TextScroll moved above team-container */}
       {/* <TextScroll className="text-scroll" text="We are creative developers" /> */}
 
@@ -85,7 +91,7 @@ const About = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div className="member-name">
-            <TeamNameFlipper href="https://github.com/MdZaheen/Onynx.dev/tree/development">ZAHEEN</TeamNameFlipper>
+            <TeamNameFlipper href="/Zaheen">ZAHEEN</TeamNameFlipper>
           </div>
           <div className="member-image member-image-zaheen">
             <img src="/images/zaheen.png" alt="Zaheen" />

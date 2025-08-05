@@ -7,9 +7,10 @@ const STAGGER = 0.025
 interface TeamNameFlipperProps {
   children: string
   href: string
+  className?: string
 }
 
-const TeamNameFlipper: React.FC<TeamNameFlipperProps> = ({ children, href }) => {
+const TeamNameFlipper: React.FC<TeamNameFlipperProps> = ({ children, href, className }) => {
   return (
     <motion.div
       initial="initial"
