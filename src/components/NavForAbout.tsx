@@ -49,7 +49,8 @@ export default function Navbar() {
       <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
         <li className={styles.navItem}>
           <Link 
-            href="/" 
+            href="/Zaheen" 
+
             className={`${styles.navLink} ${pathname === '/Zaheen' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
