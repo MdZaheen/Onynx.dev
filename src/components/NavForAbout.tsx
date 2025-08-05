@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import styles from '@/styles/Navbar.module.css';
+import styles from '@/styles/NavbarForAbout.module.css';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -49,40 +49,33 @@ export default function Navbar() {
       <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
         <li className={styles.navItem}>
           <Link 
-            href="/" 
-            className={`${styles.navLink} ${pathname === '/Home' ? styles.active : ''}`} 
+            href="/Zaheen" 
+
+            className={`${styles.navLink} ${pathname === '/Zaheen' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
-            Home
+            ZAHEEN
           </Link>
         </li>
         <li className={styles.navItem}>
           <Link 
-            href="/About" 
-            className={`${styles.navLink} ${pathname === '/About' ? styles.active : ''}`} 
+            href="/Arfath" 
+            className={`${styles.navLink} ${pathname === '/Arfath' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
-            About&nbsp;Us
+            ARFATH
           </Link>
         </li>
         <li className={styles.navItem}>
           <Link 
-            href="/projects" 
-            className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`} 
+            href="/Mannan" 
+            className={`${styles.navLink} ${pathname === '/Mannan' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
-            Projects
+            MANNAN
           </Link>
         </li>
-        <li className={styles.navItem}>
-          <Link 
-            href="/contact" 
-            className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
-        </li>
+ 
       </ul>
       <button
         className={`${styles.menuButton} ${isMenuOpen ? styles.active : ''}`}
