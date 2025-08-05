@@ -6,12 +6,14 @@ const STAGGER = 0.025
 
 interface TeamNameFlipperProps {
   children: string
+  href: string
 }
 
-const TeamNameFlipper: React.FC<TeamNameFlipperProps> = ({ children }) => {
+const TeamNameFlipper: React.FC<TeamNameFlipperProps> = ({ children, href }) => {
   return (
     <motion.div
       initial="initial"
+      onClick={() => window.open(href, '_blank')}
       whileHover="hovered"
       className="relative block overflow-hidden whitespace-nowrap text-3xl font-semibold uppercase text-[#A10000]"
       style={{

@@ -85,7 +85,7 @@ const About = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div className="member-name">
-            <TeamNameFlipper>ZAHEEN</TeamNameFlipper>
+            <TeamNameFlipper href="https://github.com/MdZaheen/Onynx.dev/tree/development">ZAHEEN</TeamNameFlipper>
           </div>
           <div className="member-image member-image-zaheen">
             <img src="/images/zaheen.png" alt="Zaheen" />
@@ -101,7 +101,7 @@ const About = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div className="member-name">
-            <TeamNameFlipper>ARFATH</TeamNameFlipper>
+            <TeamNameFlipper href="https://github.com/arfath-ahmed">ARFATH</TeamNameFlipper>
           </div>
           <div className="member-image member-image-arfath">
             <img src="/images/arfath.png" alt="Arfath" />
@@ -117,7 +117,7 @@ const About = () => {
           onMouseLeave={handleMouseLeave}
         >
           <div className="member-name">
-            <TeamNameFlipper>MANNAN</TeamNameFlipper>
+            <TeamNameFlipper href="https://github.com/Mannan007">MANNAN</TeamNameFlipper>
           </div>
           <div className="member-image member-image-mannan">
             <img src="/images/mannan.png" alt="Mannan" />
