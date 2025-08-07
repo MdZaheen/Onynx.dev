@@ -1,10 +1,30 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+
+
 import NavForAbout from '@/components/NavForAbout'
 import TeamNameFlipper from '@/components/ui/team-name-flipper'
+    // import { useMousePosition } from '@/hooks/useMousePosition'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
+import useMousePosition from '@/utils/useMousePosition'
+
 
 const Arfath = () => {
+   const { x, y } = useMousePosition();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const maskSize = useMotionValue(60);
+
+  const smoothX = useSpring(mouseX, { stiffness: 300, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 300, damping: 30 });
+  const smoothSize = useSpring(maskSize, { stiffness: 300, damping: 30 });
+  useEffect(() => {
+    mouseX.set(x);
+    mouseY.set(y);
+  }, [x, y]);
   return (
     <div className="min-h-screen w-full bg-black text-white font-inter px-6 md:px-24 py-12">
       {/* Top Navigation */}
@@ -38,6 +58,19 @@ const Arfath = () => {
           />
         </div>
       </div>
+            <motion.div
+        className="fixed z-10 pointer-events-none border border-[#9a0000] rounded-full mix-blend-difference"
+
+        style={{
+          width: smoothSize,
+          height: smoothSize,
+          left: smoothX,
+          top: smoothY,
+          x: "-50%",
+          y: "-50%",
+          transition: "width 0.2s ease, height 0.2s ease",
+        }}
+      />
     </div>
   )
 }
