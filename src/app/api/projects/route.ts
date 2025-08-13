@@ -1,6 +1,6 @@
 import dbConnect from "@/app/lib/dbconnect";
 import ProjectModel from "@/models/projects.model";
-import { uploadImageToCloudinary } from "@/utils/clodinary"; // Import reusable upload function
+import { uploadImageToCloudinary } from "@/utils/cloudinary"; // Import reusable upload function
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Create and save project
+    // Create project
     const project = await ProjectModel.create({
       title,
       description,
@@ -48,7 +48,6 @@ export async function POST(req: NextRequest) {
       image: imageUrl,
       // imagePublicId,
     });
-    await project.save();
     console.log('Project created:', project);
 
     return NextResponse.json({ success: true, project }, { status: 201 });

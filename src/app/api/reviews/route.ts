@@ -19,7 +19,6 @@ export async function POST(req:NextRequest){
             review,
             rating,
         });
-        await newReview.save();
         console.log('Review created:', newReview);
         return NextResponse.json(
             { newReview },

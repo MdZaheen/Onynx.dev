@@ -20,61 +20,107 @@
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+
   gap: 2rem;
   z-index: 10;
 }
 
 .mainText {
-  margin-top: 4rem;
+  margin-top: 8rem;
+  margin-left: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mainText h1 {
   font-family: var(--font-lexend);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 0.5rem;
+  line-height: 0;
 }
 
 .mainText p {
   font-family: var(--font-lexend);
-  font-size: 12px;
-  font-weight: 200;
-  color: #666666;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #999999;
+  margin-top: 0.5rem;
+  display: flex;
+  
+  
+
 }
 
 .terminalText {
-  font-family: monospace;
-  font-size: 1.1rem;
-  color: #00ff00;
-  line-height: 1.5;
+  font-family: var(--font-lexend);
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.3;
+  position: absolute;
+  bottom: 0rem;
+  left: 2rem;
+  z-index: 15;
+}
+
+.terminalText p {
+  margin-bottom: 0.3rem;
+  font-weight: 400;
+}
+
+.terminalText p strong {
+  color: #A10000;
+  font-weight: 600;
 }
 
 .eleganceText {
+  position: absolute;
+  bottom: 8rem;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-lexend-giga);
-  font-size: 14px;
+  font-size: 1.5rem;
   color: #ffffff;
   text-transform: lowercase;
-  opacity: 0.8;
+  opacity: 0.6;
   text-align: center;
-  width: 100%;
+  bottom: 0rem;
+  z-index: 15;
+  letter-spacing: 0.3rem;
 }
 
 .creativeCoders {
-  margin-top: auto;
+  position: fixed;
+  bottom: 0rem;
+  right: 2rem;
+  background: rgba(32, 32, 32, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 1rem 1.7rem;
+  border-radius: 1.5rem;
+  z-index: 20;
+  width: 230px;
 }
 
 .creativeCoders h2 {
   font-family: 'MARTI', sans-serif;
   font-size: 2rem;
   color: #A10000;
-  margin-bottom: 0.5rem;
+  margin:0 ;
+  margin-bottom: -10;
+  text-align: left;
 }
 
 .creativeCoders p {
-  font-family: monospace;
+  font-family: var(--font-lexend);
   font-size: 1rem;
-  color: #666666;
+  color: #ffffff;
+  opacity: 0.8;
+  /* margin: 0; */
+  text-align: right;
 }
 
 .logo {
@@ -95,7 +141,7 @@
 
 .samuraiImageContainer {
   position: absolute;
-  bottom: 0;
+  bottom: -20;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -127,6 +173,24 @@
   
   .logo {
     font-size: 1.6rem;
+  }
+  
+  .mainText {
+    margin-left: 1rem;
+  }
+  
+  .mainText h1 {
+    font-size: 2rem;
+  }
+  
+  .terminalText {
+    margin-left: 1rem;
+    font-size: 1rem;
+  }
+  
+  .eleganceText {
+    font-size: 1.2rem;
+    bottom: 6rem;
   }
   
   .samuraiImageContainer {
