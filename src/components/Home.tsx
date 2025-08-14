@@ -6,38 +6,38 @@ import Link from 'next/link';
 
 const Home: React.FC = () => {
   return (
-    <main className={styles.container}>
+    <main className={styles.container} data-animate="background">
       {/* Keep Logo */}
-      <Link href="/" className={styles.logo}>ONYXDEV</Link>
+      <Link href="/" className={styles.logo} data-animate="logo">ONYXDEV</Link>
 
       {/* Keep Tagline */}
-      <Tagline />
+      <Tagline data-animate="tagline" />
 
       {/* Content Wrapper */}
       <div className={styles.content}>
         {/* Block 1 - Main Heading */}
         <div className={styles.mainText}>
-          <h1>WE MAKE COOL THINGS</h1>
-          <p>[Manifesting Interfaces]</p>
+          <h1 data-animate="main-heading">WE MAKE COOL THINGS</h1>
+          <p data-animate="sub-heading">[Manifesting Interfaces]</p>
         </div>
 
-        {/* Block 2 - Terminal Text */}
-        <div className={styles.terminalText}>
-          <p>&gt; <strong>Initia</strong>lizing...</p>
-          <p>&gt; Loading <strong>Projects</strong>...</p>
-          <p>&gt; System: Elegance <strong>Protocol Online</strong></p>
-        </div>
-
-        {/* Block 3 - Elegance Text */}
-        <div className={styles.eleganceText}>
-          <p>elegance</p>
-        </div>
-
-        {/* Block 4 - Creative Coders */}
-        <div className={styles.creativeCoders}>
+        {/* Block 2 - Creative Coders */}
+        <div className={styles.creativeCoders} data-animate="creative-coders">
           <h2>Creative Coders</h2>
           <p>From Onyx Devs</p>
         </div>
+      </div>
+
+      {/* Terminal Text - Outside Content for Full Visibility */}
+      <div className={styles.terminalText}>
+        <p>&gt; <strong>Initia</strong>lizing...</p>
+        <p>&gt; Loading <strong>Projects</strong>...</p>
+        <p>&gt; System: Elegance <strong>Protocol Online</strong></p>
+      </div>
+
+      {/* Elegance Text - Perfectly Centered at Bottom */}
+      <div className={styles.eleganceText} data-animate="elegance">
+        <p>elegance</p>
       </div>
 
       {/* Samurai Image */}
@@ -48,6 +48,7 @@ const Home: React.FC = () => {
           width={1000}
           height={1000}
           className={styles.samuraiImage}
+          data-animate="samurai"
           priority
         />
       </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lexend, Lexend_Giga } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import PageAnimator from "@/components/PageAnimator";
 import "./globals.css";
+import "@/styles/pageAnimations.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +41,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${lexend.variable} ${lexendGiga.variable} antialiased`}
       >
         <Navbar />
-        {children}
+        <PageAnimator>
+          {children}
+        </PageAnimator>
       </body>
     </html>
   );

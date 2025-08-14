@@ -3,7 +3,11 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Tagline.module.css';
 
-const Tagline = () => {
+interface TaglineProps {
+  'data-animate'?: string;
+}
+
+const Tagline = (props: TaglineProps) => {
   const [currentTime, setCurrentTime] = useState('');
   const [prevTime, setPrevTime] = useState('');
   const hourFirstRef = useRef<HTMLSpanElement>(null);
@@ -86,7 +90,7 @@ const Tagline = () => {
   };
 
   return (
-    <div className={styles.taglineContainer}>
+    <div className={styles.taglineContainer} {...props}>
       <div className={styles.taglineText}>
         <div>
           <span className={styles.slashRed}>//</span>
