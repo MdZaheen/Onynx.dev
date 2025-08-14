@@ -90,6 +90,12 @@ ONYXDEV is a modern, sleek portfolio website built with Next.js, featuring a dar
 
 ## Recent Updates
 
+- Restyled Creative Coders section with glass effect, fixed positioning, and updated typography
+- Updated terminal text font to Lexend for better visual consistency
+- Fixed samurai image visibility by correcting the image file path
+- Updated terminal text styling with 14px font size, white color, and deep red (#A10000) highlights for specific words
+- Added bold styling to 'Init', 'Projects', and 'Protocol Online' in terminal text
+- Improved terminal text spacing and positioning with proper margins
 - Fixed 'About Us' text to display on a single line using non-breaking space
 - Modified active link styling to only show red color on hover instead of by default
 - Fixed Navbar active link styling to dynamically highlight based on current page path

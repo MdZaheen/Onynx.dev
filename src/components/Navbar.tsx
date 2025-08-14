@@ -24,12 +24,49 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const threshold = 50;
+      const navbar = document.querySelector(`.${styles.navbar}`);
+      if (window.scrollY > threshold) {
+        setIsScrolled(true);
+        navbar?.classList.add(styles['is-stuck']);
+      } else {
+        setIsScrolled(false);
+        navbar?.classList.remove(styles['is-stuck']);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Modern navbar entrance animation on mount
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
+    const navbar = document.querySelector(`.${styles.navbar}`);
+    const navItems = document.querySelectorAll(`.${styles.navItem}`);
+    const activeLink = document.querySelector(`.${styles.navLink}.${styles.active}`);
+
+    // Trigger navbar entrance
+    setTimeout(() => navbar?.classList.add(styles['animate-in']), 100);
+
+    // Staggered link reveals
+    navItems.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add(styles['link-in']);
+      }, 200 + (80 * index));
+    });
+
+    // Active link pulse after all reveals
+    if (activeLink) {
+      const pulseDelay = 200 + (80 * navItems.length) + 420;
+      setTimeout(() => {
+        activeLink.classList.add(styles.pulse);
+        setTimeout(() => activeLink.classList.remove(styles.pulse), 950);
+      }, pulseDelay);
+    }
+  }, [pathname]);
 
   return (
     <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>

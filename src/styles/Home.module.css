@@ -12,6 +12,31 @@
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
+  will-change: transform, opacity, filter;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(161, 0, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(161, 0, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: ambientPulse 8s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .content {
@@ -20,62 +45,365 @@
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+
   gap: 2rem;
   z-index: 10;
 }
 
 .mainText {
-  margin-top: 4rem;
+  margin-top: 8rem;
+  margin-left: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mainText h1 {
   font-family: var(--font-lexend);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #ffffff;
   margin-bottom: 0.5rem;
+  line-height: 0;
+  cursor: default;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.mainText h1:hover {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  letter-spacing: 1px;
 }
 
 .mainText p {
   font-family: var(--font-lexend);
-  font-size: 12px;
-  font-weight: 200;
-  color: #666666;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #999999;
+  margin-top: 0.5rem;
+  display: flex;
+  cursor: default;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.mainText p:hover {
+  color: #bbbbbb;
+}
+
+.mainText p::before {
+  content: '[';
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.mainText p::after {
+  content: ']';
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.mainText p:hover::before,
+.mainText p:hover::after {
+  opacity: 0.8;
+  color: #A10000;
 }
 
 .terminalText {
-  font-family: monospace;
-  font-size: 1.1rem;
-  color: #00ff00;
-  line-height: 1.5;
+  font-family: var(--font-lexend);
+  font-size: 1rem;
+  color: #ffffff;
+  line-height: 1.6;
+  position: fixed;
+  bottom: 1rem;
+  left: 2rem;
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.terminalText p {
+  margin: 0;
+  margin-bottom: 0.4rem;
+  padding: 0.2rem 0;
+  font-weight: 400;
+  position: relative;
+  overflow: visible;
+  display: block;
+  white-space: nowrap;
+}
+
+.terminalText p strong {
+  color: #A10000;
+  font-weight: 600;
+}
+
+/* Subtle Continuous Glitch Effects */
+.terminalText p:nth-child(1) {
+  animation: glitch1 4s infinite;
+}
+
+.terminalText p:nth-child(2) {
+  animation: glitch2 5s infinite;
+}
+
+.terminalText p:nth-child(3) {
+  animation: glitch3 4.5s infinite;
+}
+
+/* Glitch Animation 1 - Subtle corruption */
+@keyframes glitch1 {
+  0%, 92%, 100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  2% {
+    transform: translate(2px, 0);
+    text-shadow: -1px 0 #ff0000, 1px 0 #00ffff;
+  }
+  4% {
+    transform: translate(-1px, 0);
+    text-shadow: 1px 0 #A10000;
+  }
+}
+
+/* Glitch Animation 2 - RGB split */
+@keyframes glitch2 {
+  0%, 90%, 100% {
+    transform: translate(0);
+    text-shadow: none;
+  }
+  5% {
+    transform: translate(-2px, 0);
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
+  }
+  7% {
+    transform: translate(1px, 0);
+    text-shadow: -1px 0 #A10000;
+  }
+}
+
+/* Glitch Animation 3 - Static flicker */
+@keyframes glitch3 {
+  0%, 88%, 100% {
+    opacity: 1;
+    transform: scaleX(1);
+    text-shadow: none;
+  }
+  6% {
+    opacity: 0.8;
+    transform: scaleX(1.02);
+    text-shadow: 0 0 5px #A10000;
+  }
+  8% {
+    opacity: 1;
+    transform: scaleX(0.98);
+    text-shadow: 1px 0 #ff0000;
+  }
+}
+
+/* Data Corruption Effects */
+@keyframes dataCorruption1 {
+  0%, 95%, 100% {
+    letter-spacing: 0;
+  }
+  48% {
+    letter-spacing: 2px;
+  }
+  52% {
+    letter-spacing: -1px;
+  }
+}
+
+@keyframes dataCorruption2 {
+  0%, 96%, 100% {
+    word-spacing: 0;
+    transform: scaleY(1);
+  }
+  33% {
+    word-spacing: 5px;
+    transform: scaleY(1.1);
+  }
+  66% {
+    word-spacing: -2px;
+    transform: scaleY(0.9);
+  }
+}
+
+@keyframes dataCorruption3 {
+  0%, 94%, 100% {
+    font-weight: 400;
+    text-decoration: none;
+  }
+  25% {
+    font-weight: 100;
+    text-decoration: line-through;
+  }
+  50% {
+    font-weight: 900;
+    text-decoration: underline;
+  }
+  75% {
+    font-weight: 300;
+    text-decoration: overline;
+  }
+}
+
+/* Subtle glitch for strong tags */
+.terminalText p strong {
+  position: relative;
+}
+
+.terminalText p:nth-child(1) strong {
+  animation: redGlitch 3s infinite;
+}
+
+.terminalText p:nth-child(2) strong {
+  animation: redGlitch 4s infinite;
+}
+
+.terminalText p:nth-child(3) strong {
+  animation: redGlitch 3.5s infinite;
+}
+
+@keyframes redGlitch {
+  0%, 95% {
+    color: #A10000;
+    text-shadow: none;
+  }
+  5% {
+    color: #ff3333;
+    text-shadow: 0 0 5px #A10000;
+  }
+  7% {
+    color: #A10000;
+    text-shadow: none;
+  }
+}
+
+/* Subtle scanline effect */
+.terminalText::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 100%
+  );
+  animation: scanline 2s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .eleganceText {
+  position: fixed;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
   font-family: var(--font-lexend-giga);
-  font-size: 14px;
+  font-size: 1.5rem;
   color: #ffffff;
   text-transform: lowercase;
-  opacity: 0.8;
+  opacity: 0.6;
   text-align: center;
-  width: 100%;
+  z-index: 15;
+  letter-spacing: 0.3rem;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  transition: all 0.4s ease;
+}
+
+.eleganceText:hover {
+  opacity: 0.8;
+  letter-spacing: 0.4rem;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.eleganceText::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: width 0.5s ease;
+}
+
+.eleganceText:hover::before {
+  width: 200px;
 }
 
 .creativeCoders {
-  margin-top: auto;
+  position: fixed;
+  bottom: 0rem;
+  right: 2rem;
+  background: rgba(20, 20, 25, 0.3);
+  backdrop-filter: blur(15px);
+  padding: 1.2rem 1.8rem;
+  border-radius: 1.2rem;
+  z-index: 20;
+  width: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.creativeCoders:hover {
+  background: rgba(30, 30, 35, 0.4);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .creativeCoders h2 {
   font-family: 'MARTI', sans-serif;
   font-size: 2rem;
   color: #A10000;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  margin-bottom: -8px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.creativeCoders:hover h2 {
+  color: #ff3333;
 }
 
 .creativeCoders p {
-  font-family: monospace;
+  font-family: var(--font-lexend);
   font-size: 1rem;
-  color: #666666;
+  color: #cccccc;
+  margin: 0;
+  text-align: right;
+  transition: all 0.3s ease;
 }
+
+.creativeCoders:hover p {
+  color: #ffffff;
+}
+
 
 .logo {
   font-family: 'MARTI', sans-serif;
@@ -83,19 +411,38 @@
   color: #A10000;
   z-index: 10;
   flex-shrink: 0;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   position: absolute;
   left: 2rem;
   top: 1rem;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .logo:hover {
   color: #ff3333;
+  text-shadow: 0 0 8px rgba(161, 0, 0, 0.4);
+  transform: scale(1.02);
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg, #A10000, transparent);
+  transition: width 0.4s ease;
+}
+
+.logo:hover::after {
+  width: 100%;
 }
 
 .samuraiImageContainer {
   position: absolute;
-  bottom: 0;
+  bottom: -20;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -129,6 +476,25 @@
     font-size: 1.6rem;
   }
   
+  .mainText {
+    margin-left: 1rem;
+  }
+  
+  .mainText h1 {
+    font-size: 2rem;
+  }
+  
+  .terminalText {
+    left: 1rem;
+    bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .eleganceText {
+    font-size: 1.2rem;
+    bottom: 1.5rem;
+  }
+  
   .samuraiImageContainer {
     width: 85%;
     height: 75vh;
@@ -147,5 +513,18 @@
   .samuraiImageContainer {
     width: 90%;
     height: 70vh;
+  }
+}
+
+/* Disable glitch effects for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .terminalText p:nth-child(1),
+  .terminalText p:nth-child(2),
+  .terminalText p:nth-child(3),
+  .terminalText p:nth-child(1) strong,
+  .terminalText p:nth-child(2) strong,
+  .terminalText p:nth-child(3) strong,
+  .terminalText::before {
+    animation: none !important;
   }
 }

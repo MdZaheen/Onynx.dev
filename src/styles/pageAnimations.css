@@ -1,0 +1,233 @@
+/* Modern Page Entrance Animations - Performance Optimized */
+
+/* Page Container Animation */
+[data-animate="page-container"] {
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+[data-animate="page-container"].animate-page-in {
+  animation: pageEntranceIn 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes pageEntranceIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background Image Animation - Simplified */
+[data-animate="background"] {
+  opacity: 0;
+  transform: scale(1.02);
+  will-change: opacity, transform;
+}
+
+[data-animate="background"].animate-bg-in {
+  animation: backgroundIn 800ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes backgroundIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Logo Animation - Optimized */
+[data-animate="logo"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  will-change: opacity, transform;
+}
+
+[data-animate="logo"].animate-logo-in {
+  animation: logoSlideIn 400ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes logoSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Tagline Animation - Optimized */
+[data-animate="tagline"] {
+  opacity: 0;
+  transform: translateX(30px);
+  will-change: opacity, transform;
+}
+
+[data-animate="tagline"].animate-tagline-in {
+  animation: taglineSlideIn 500ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes taglineSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Main Heading Animation - Optimized */
+[data-animate="main-heading"] {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  will-change: opacity, transform;
+}
+
+[data-animate="main-heading"].animate-heading-in {
+  animation: headingScaleIn 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes headingScaleIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Sub Heading Animation - Optimized */
+[data-animate="sub-heading"] {
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+[data-animate="sub-heading"].animate-subheading-in {
+  animation: subHeadingFadeUp 400ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes subHeadingFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Terminal Line Animation - Optimized */
+[data-animate="terminal-line"] {
+  opacity: 0;
+  transform: translateX(-15px);
+  will-change: opacity, transform;
+}
+
+[data-animate="terminal-line"].animate-terminal-in {
+  animation: terminalTypeIn 350ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes terminalTypeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Samurai Image Animation - Optimized */
+[data-animate="samurai"] {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: opacity, transform;
+}
+
+[data-animate="samurai"].animate-samurai-in {
+  animation: samuraiMaterialize 800ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes samuraiMaterialize {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Elegance Text Animation - Optimized */
+[data-animate="elegance"] {
+  opacity: 0;
+  transform: translateY(15px);
+  will-change: opacity, transform;
+}
+
+[data-animate="elegance"].animate-elegance-in {
+  animation: eleganceFloat 600ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes eleganceFloat {
+  to {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+}
+
+/* Creative Coders Animation - Optimized */
+[data-animate="creative-coders"] {
+  opacity: 0;
+  transform: translateX(25px);
+  will-change: opacity, transform;
+}
+
+[data-animate="creative-coders"].animate-coders-in {
+  animation: codersSlideIn 500ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes codersSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Performance Optimized - Minimal Effects */
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  @keyframes pageEntranceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes backgroundIn {
+    0% {
+      opacity: 0;
+      transform: scale(1.03);
+      filter: blur(10px) brightness(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px) brightness(1);
+    }
+  }
+  
+  /* Reduce animation complexity on mobile */
+  [data-animate="logo"],
+  [data-animate="tagline"],
+  [data-animate="main-heading"],
+  [data-animate="sub-heading"] {
+    animation-duration: 400ms !important;
+  }
+  
+  [data-animate="terminal-line"] {
+    animation-duration: 300ms !important;
+  }
+}

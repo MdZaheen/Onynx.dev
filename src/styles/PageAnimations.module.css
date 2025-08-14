@@ -1,0 +1,381 @@
+/* Modern Page Entrance Animations - Framer Motion Inspired */
+
+/* Global Loading States - Applied via JavaScript */
+.pageLoading {
+  overflow: hidden;
+  cursor: wait;
+}
+
+.pageLoaded {
+  overflow: auto;
+  cursor: default;
+}
+
+/* Page Container Animation */
+.pageContainer {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  transition: none;
+}
+
+.pageContainer.animatePageIn {
+  animation: pageEntranceIn 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEntranceIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background Image Animation */
+[data-animate="background"] {
+  opacity: 0;
+  transform: scale(1.05);
+  filter: blur(20px) brightness(0.3);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="background"].animate-bg-in {
+  animation: backgroundIn 1200ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes backgroundIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+    filter: blur(20px) brightness(0.3);
+  }
+  60% {
+    opacity: 0.8;
+    transform: scale(1.02);
+    filter: blur(5px) brightness(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px) brightness(1);
+  }
+}
+
+/* Logo Animation */
+[data-animate="logo"] {
+  opacity: 0;
+  transform: translateX(-40px) scale(0.8);
+  filter: blur(8px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="logo"].animate-logo-in {
+  animation: logoSlideIn 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes logoSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.8);
+    filter: blur(8px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(0) scale(1.05);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Tagline Animation */
+[data-animate="tagline"] {
+  opacity: 0;
+  transform: translateX(40px) translateY(-10px);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="tagline"].animate-tagline-in {
+  animation: taglineSlideIn 700ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes taglineSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) translateY(-10px);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(0) translateY(0);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Main Heading Animation */
+[data-animate="main-heading"] {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  filter: blur(10px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="main-heading"].animate-heading-in {
+  animation: headingScaleIn 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes headingScaleIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1.02);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Sub Heading Animation */
+[data-animate="sub-heading"] {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="sub-heading"].animate-subheading-in {
+  animation: subHeadingFadeUp 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes subHeadingFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Terminal Line Animation */
+[data-animate="terminal-line"] {
+  opacity: 0;
+  transform: translateX(-20px) translateY(10px);
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="terminal-line"].animate-terminal-in {
+  animation: terminalTypeIn 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes terminalTypeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) translateY(10px);
+    filter: blur(4px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(0) translateY(0);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Samurai Image Animation */
+[data-animate="samurai"] {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  filter: blur(15px) saturate(0.5);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="samurai"].animate-samurai-in {
+  animation: samuraiMaterialize 1000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes samuraiMaterialize {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    filter: blur(15px) saturate(0.5);
+  }
+  40% {
+    opacity: 0.3;
+    transform: translateY(10px) scale(0.98);
+    filter: blur(8px) saturate(0.7);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+    filter: blur(3px) saturate(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(1.5px) saturate(0.7);
+  }
+}
+
+/* Elegance Text Animation */
+[data-animate="elegance"] {
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  filter: blur(8px);
+  will-change: opacity, transform, filter;
+}
+
+[data-animate="elegance"].animate-elegance-in {
+  animation: eleganceFloat 900ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes eleganceFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    filter: blur(8px);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(-5px) scale(1.02);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 0.6;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Creative Coders Animation */
+[data-animate="creative-coders"] {
+  opacity: 0;
+  transform: translateX(40px) translateY(20px) scale(0.9);
+  filter: blur(6px);
+  backdrop-filter: blur(0px);
+  will-change: opacity, transform, filter, backdrop-filter;
+}
+
+[data-animate="creative-coders"].animate-coders-in {
+  animation: codersSlideIn 700ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes codersSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) translateY(20px) scale(0.9);
+    filter: blur(6px);
+    backdrop-filter: blur(0px);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(0) translateY(0) scale(1.02);
+    filter: blur(2px);
+    backdrop-filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1);
+    filter: blur(0);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Enhanced Micro Interactions */
+[data-animate="logo"].animate-logo-in {
+  animation: logoSlideIn 600ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+             logoGlow 2s ease-in-out 1s infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% { text-shadow: 0 0 5px rgba(161, 0, 0, 0.3); }
+  100% { text-shadow: 0 0 15px rgba(161, 0, 0, 0.6), 0 0 25px rgba(161, 0, 0, 0.3); }
+}
+
+/* Stagger Delay Variables for Terminal Lines */
+[data-animate="terminal-line"]:nth-child(1) {
+  animation-delay: 0ms;
+}
+[data-animate="terminal-line"]:nth-child(2) {
+  animation-delay: 150ms;
+}
+[data-animate="terminal-line"]:nth-child(3) {
+  animation-delay: 300ms;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  @keyframes pageEntranceIn {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes backgroundIn {
+    0% {
+      opacity: 0;
+      transform: scale(1.03);
+      filter: blur(10px) brightness(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0px) brightness(1);
+    }
+  }
+  
+  /* Reduce animation complexity on mobile */
+  [data-animate="logo"],
+  [data-animate="tagline"],
+  [data-animate="main-heading"],
+  [data-animate="sub-heading"] {
+    animation-duration: 400ms !important;
+  }
+  
+  [data-animate="terminal-line"] {
+    animation-duration: 300ms !important;
+  }
+}

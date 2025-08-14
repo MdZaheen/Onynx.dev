@@ -18,7 +18,7 @@
 .inDarkText,
 .slashRed,
 .slashWhite {
-  font-size: 16px;
+  font-size: 1.143rem;
   letter-spacing: 1px;
   margin: 0;
   padding: 0;
@@ -49,7 +49,7 @@
 }
 
 .timeText {
-  font-size: 12px;
+  font-size: 0.857rem;
   color: #FFFFFF;
   font-weight: 400;
   margin: 0;
@@ -68,7 +68,7 @@
   margin: 0 1px;
   font-family: 'Lexend', sans-serif;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 0.857rem;
   text-shadow: 0 0 5px #ff0055;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
