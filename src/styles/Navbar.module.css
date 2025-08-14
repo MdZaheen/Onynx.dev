@@ -92,12 +92,13 @@
 
 .navLink:hover {
   color: #ff3333;
-  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
-  transform: translateY(-1px);
+  text-shadow: 0 0 12px rgba(255, 51, 51, 0.6);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .navLink:hover::after {
-  width: 80%;
+  width: 100%;
+  box-shadow: 0 0 8px rgba(255, 51, 51, 0.4);
 }
 
 .active {
@@ -130,10 +131,24 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 8px;
   z-index: 1001;
   position: relative;
   margin-right: 10px;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menuButton:hover {
+  background: rgba(161, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(161, 0, 0, 0.2);
+}
+
+.menuButton:hover span {
+  background-color: #ff3333;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.6);
+  transform: scaleX(1.1);
 }
 
 .menuButton span {
@@ -141,8 +156,8 @@
   height: 3px;
   background-color: #A10000;
   border-radius: 3px;
-  transition: all 0.3s ease;
-  transform-origin: 1px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
   box-shadow: 0 0 5px rgba(161, 0, 0, 0.5);
 }
 

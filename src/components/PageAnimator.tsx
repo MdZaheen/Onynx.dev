@@ -21,7 +21,6 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
       const tagline = document.querySelector('[data-animate="tagline"]');
       const mainHeading = document.querySelector('[data-animate="main-heading"]');
       const subHeading = document.querySelector('[data-animate="sub-heading"]');
-      const terminalLines = document.querySelectorAll('[data-animate="terminal-line"]');
       const eleganceText = document.querySelector('[data-animate="elegance"]');
       const samuraiImage = document.querySelector('[data-animate="samurai"]');
       const creativeCoders = document.querySelector('[data-animate="creative-coders"]');
@@ -60,33 +59,26 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
           subHeading?.classList.add('animate-subheading-in');
         }, 650);
 
-        // 7. Terminal lines staggered (800ms start)
-        terminalLines.forEach((line, index) => {
-          setTimeout(() => {
-            line.classList.add('animate-terminal-in');
-          }, 800 + (index * 100));
-        });
-
-        // 8. Samurai image reveal (1100ms delay)
+        // 7. Samurai image reveal (800ms delay - moved earlier)
         setTimeout(() => {
           samuraiImage?.classList.add('animate-samurai-in');
-        }, 1100);
+        }, 800);
 
-        // 9. Elegance text float in (1300ms delay)
+        // 8. Elegance text float in (1000ms delay)
         setTimeout(() => {
           eleganceText?.classList.add('animate-elegance-in');
-        }, 1300);
+        }, 1000);
 
-        // 10. Creative coders slide in (1450ms delay)
+        // 9. Creative coders slide in (1150ms delay)
         setTimeout(() => {
           creativeCoders?.classList.add('animate-coders-in');
-        }, 1450);
+        }, 1150);
 
-        // 11. Remove loading state (1800ms delay)
+        // 10. Remove loading state (1500ms delay - shortened)
         setTimeout(() => {
           body.style.overflow = 'auto';
           body.style.cursor = 'default';
-        }, 1800);
+        }, 1500);
 
       }, 50);
     };
