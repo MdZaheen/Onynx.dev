@@ -16,5 +16,24 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Custom plugin for mask utilities
+    function ({ addUtilities }) {
+      addUtilities({
+        '.mask-no-repeat': {
+          maskRepeat: 'no-repeat',
+          WebkitMaskRepeat: 'no-repeat',
+        },
+        '.mask-repeat': {
+          maskRepeat: 'repeat',
+          WebkitMaskRepeat: 'repeat',
+        },
+        '.mask-center': {
+          maskPosition: 'center',
+          WebkitMaskPosition: 'center',
+        },
+        
+      })
+    }
+  ],
 };

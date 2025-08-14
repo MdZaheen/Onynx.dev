@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from '../styles/Home.module.css';
-import Tagline from './Tagline';
+import styles from '@/styles/Home.module.css';
+import Tagline from '@/components/Tagline';
 import Link from 'next/link';
 
 const Home: React.FC = () => {

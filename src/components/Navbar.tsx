@@ -9,7 +9,19 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  // console.log('Current route:', pathname);
 
+
+  // ❌ Pages where you want to hide the Navbar
+  // const hiddenRoutes = ['/routes/AboutDetailZaheen'];
+
+
+  // // ✅ Don't render Navbar on hidden routes
+  // if (hiddenRoutes.includes(pathname)) {
+  //   return null;
+  // }
+
+  // Disable body scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -22,6 +34,7 @@ export default function Navbar() {
     };
   }, [isMenuOpen]);
 
+  // Add scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const threshold = 50;
@@ -73,8 +86,8 @@ export default function Navbar() {
       <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
         <li className={styles.navItem}>
           <Link 
-            href="/home" 
-            className={`${styles.navLink} ${pathname === '/home' ? styles.active : ''}`} 
+            href="/" 
+            className={`${styles.navLink} ${pathname === '/Home' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
             Home
@@ -82,8 +95,8 @@ export default function Navbar() {
         </li>
         <li className={styles.navItem}>
           <Link 
-            href="/about" 
-            className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`} 
+            href="/About" 
+            className={`${styles.navLink} ${pathname === '/About' ? styles.active : ''}`} 
             onClick={() => setIsMenuOpen(false)}
           >
             About&nbsp;Us
