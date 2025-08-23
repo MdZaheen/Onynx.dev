@@ -4,17 +4,16 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  background-color: black;
-  color: white;
-  overflow: hidden;
-  position: relative;
-  font-family: Arial, sans-serif;
-  /* background-image: url('/images/background.png'); */
+  background-color: #000000;
+  background-image: url('/images/background1.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
- font-family: 'Lexend Exa';
+  color: white;
+  overflow: hidden;
+  position: relative;
+  font-family: 'Lexend Exa';
+  will-change: transform, opacity, filter;
 }
 * {
   font-family: 'Lexend Exa', sans-serif;
@@ -147,6 +146,30 @@
 .member-image-arfath:hover img {
   filter: grayscale(0%) brightness(90%) sepia(20%) hue-rotate(100deg);
 }
+.about-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(161, 0, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(161, 0, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+  animation: ambientPulse 8s ease-in-out infinite;
+}
+
+@keyframes ambientPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 .about-container {
   position: relative;
   overflow: visible !important; /* ✅ FIXED */

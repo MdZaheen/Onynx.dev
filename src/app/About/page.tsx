@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, useRef } from 'react'
 import '@/styles/About.css'
-import Navbar from '@/components/Navbar'
 
 import TeamNameFlipper from '@/components/ui/team-name-flipper'
 // import { TextScroll } from '../components/ui/text-scroll'
@@ -76,10 +75,8 @@ const About = () => {
   }
 
   return (
-  
-    <div className="about-container">
-        <Navbar />
-
+    <div className="flex flex-col min-h-screen bg-black text-white w-full relative overflow-hidden">
+      <div className="about-container">
       {/* ✅ TextScroll moved above team-container */}
       {/* <TextScroll className="text-scroll" text="We are creative developers" /> */}
 
@@ -145,6 +142,7 @@ const About = () => {
 
       {/* Background */}
       <div className="background-pattern"></div>
+      </div>
     </div>
   )
 }

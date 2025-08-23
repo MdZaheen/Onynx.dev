@@ -57,7 +57,7 @@ const Zaheen = () => {
     <div className="relative bg-black text-white min-h-screen  font-inter overflow-hidden">
   <div className="nav fixed top-12   left-20 w-full h-[10%] ">
     
-     <NavForAbout /></div>   
+    </div>   
 
       {/* Main Layout */}
       <div className="flex flex-col  md:flex-row justify-between items-center gap-16 ">

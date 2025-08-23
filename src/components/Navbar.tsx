@@ -37,7 +37,7 @@ export default function Navbar() {
   // Add scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      const threshold = 50;
+      const threshold = 20; // Reduced threshold for faster activation
       const navbar = document.querySelector(`.${styles.navbar}`);
       if (window.scrollY > threshold) {
         setIsScrolled(true);
@@ -48,6 +48,9 @@ export default function Navbar() {
       }
     };
 
+    // Trigger immediately to check initial scroll position
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -82,54 +85,53 @@ export default function Navbar() {
   }, [pathname]);
 
   return (
-    <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
-      <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
-        <li className={styles.navItem}>
-          <Link 
-            href="/" 
-            className={`${styles.navLink} ${pathname === '/Home' ? styles.active : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Home
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link 
-            href="/About" 
-            className={`${styles.navLink} ${pathname === '/About' ? styles.active : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            About&nbsp;Us
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link 
-            href="/projects" 
-            className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Projects
-          </Link>
-        </li>
-        <li className={styles.navItem}>
-          <Link 
-            href="/contact" 
-            className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} 
-            onClick={() => setIsMenuOpen(false)}
-          >
-            Contact
-          </Link>
-        </li>
-      </ul>
-      <button
-        className={`${styles.menuButton} ${isMenuOpen ? styles.active : ''}`}
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="Toggle menu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
+    <ul className={`${styles.navList} ${isMenuOpen ? styles.menuOpen : ''}`}>
+      <li className={styles.navItem}>
+        <button 
+          onClick={() => {
+            setIsMenuOpen(false);
+            const element = document.getElementById('home');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className={styles.navLink}
+        >
+          Home
+        </button>
+      </li>
+      <li className={styles.navItem}>
+        <button 
+          onClick={() => {
+            setIsMenuOpen(false);
+            const element = document.getElementById('about');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className={styles.navLink}
+        >
+          About&nbsp;Us
+        </button>
+      </li>
+      <li className={styles.navItem}>
+        <Link 
+          href="/projects" 
+          className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`} 
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Projects
+        </Link>
+      </li>
+      <li className={styles.navItem}>
+        <Link 
+          href="/contact" 
+          className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} 
+          onClick={() => setIsMenuOpen(false)}
+        >
+          Contact
+        </Link>
+      </li>
+    </ul>
   );
 }

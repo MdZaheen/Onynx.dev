@@ -1,21 +1,70 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface PageAnimatorProps {
   children: React.ReactNode;
 }
 
 export default function PageAnimator({ children }: PageAnimatorProps) {
+  const pathname = usePathname();
+
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
+
+    // Reset all animations before starting new ones
+    const resetAnimations = () => {
+      const elementsToReset = [
+        '[data-animate="page-container"]',
+        '[data-animate="background"]',
+        '[data-animate="logo"]',
+        '[data-animate="tagline"]',
+        '[data-animate="main-heading"]',
+        '[data-animate="sub-heading"]',
+        '[data-animate="elegance"]',
+        '[data-animate="samurai"]',
+        '[data-animate="creative-coders"]'
+      ];
+
+      elementsToReset.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach(element => {
+          // Remove all animation classes
+          element.classList.remove(
+            'animate-page-in',
+            'animate-bg-in',
+            'animate-logo-in',
+            'animate-tagline-in',
+            'animate-heading-in',
+            'animate-subheading-in',
+            'animate-samurai-in',
+            'animate-elegance-in',
+            'animate-coders-in'
+          );
+        });
+      });
+    };
 
     // Master animation sequence
     const runPageEntranceAnimation = () => {
       // Get all elements
       const body = document.body;
       const pageContainer = document.querySelector('[data-animate="page-container"]');
+      
+      // Only run full home page animations if we're on the home page
+      const isHomePage = pathname === '/';
+      
+      if (!isHomePage) {
+        // For non-home pages, just do a simple page fade-in
+        body.style.overflow = 'auto';
+        body.style.cursor = 'default';
+        pageContainer?.classList.add('animate-page-in');
+        return;
+      }
+      
+      // Home page specific elements
       const backgroundImage = document.querySelector('[data-animate="background"]');
       const logo = document.querySelector('[data-animate="logo"]');
       const tagline = document.querySelector('[data-animate="tagline"]');
@@ -26,7 +75,7 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
       const creativeCoders = document.querySelector('[data-animate="creative-coders"]');
 
       // Initialize all elements as hidden
-      body.style.overflow = 'hidden';
+      // Don't disable overflow completely to work with Lenis
       body.style.cursor = 'wait';
 
       // Start the sequence with optimized timing
@@ -83,10 +132,17 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
       }, 50);
     };
 
-    // Run animation on mount
-    runPageEntranceAnimation();
+    // Use requestAnimationFrame to ensure smooth transitions without visible resets
+    requestAnimationFrame(() => {
+      resetAnimations();
+      
+      // Use a longer delay to prevent flash between reset and animation
+      requestAnimationFrame(() => {
+        runPageEntranceAnimation();
+      });
+    });
 
-  }, []);
+  }, [pathname]); // Re-run when pathname changes
 
   return <div data-animate="page-container">{children}</div>;
 }

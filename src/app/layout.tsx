@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Lexend, Lexend_Giga } from "next/font/google";
-import Navbar from "@/components/Navbar";
 import PageAnimator from "@/components/PageAnimator";
+import Navbar from "@/components/Navbar";
+import SmoothScrolling from "@/components/SmoothScrolling";
 import "./globals.css";
 import "@/styles/pageAnimations.css";
 
@@ -40,10 +41,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${lexend.variable} ${lexendGiga.variable} antialiased`}
       >
-        <Navbar />
-        <PageAnimator>
-          {children}
-        </PageAnimator>
+        <SmoothScrolling>
+          <Navbar />
+          <PageAnimator>
+            {children}
+          </PageAnimator>
+        </SmoothScrolling>
       </body>
     </html>
   );
