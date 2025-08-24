@@ -24,9 +24,10 @@ export const uploadImageToCloudinary = async (file: File) => {
           console.error("Cloudinary upload error:", error);
           reject(error);
         } else {
+          const cloudinaryResult = result as { secure_url: string; public_id: string };
           resolve({
-            secure_url: (result as any).secure_url,
-            public_id: (result as any).public_id
+            secure_url: cloudinaryResult.secure_url,
+            public_id: cloudinaryResult.public_id
           });
         }
       }

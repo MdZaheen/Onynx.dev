@@ -24,15 +24,14 @@ export async function POST(req: NextRequest) {
 
     // Initialize image variables
     let imageUrl = null;
-    let imagePublicId = null;
 
     // If image provided, upload using utility function
     if (imageFile && imageFile.size > 0) {
       try {
-        const { secure_url, public_id } = await uploadImageToCloudinary(imageFile);
+        const { secure_url } = await uploadImageToCloudinary(imageFile);
         imageUrl = secure_url;
-        imagePublicId = public_id;
-      } catch (error) {
+      } catch (uploadError) {
+        console.error('Image upload error:', uploadError);
         return NextResponse.json(
           { error: "Image upload failed" },
           { status: 500 }

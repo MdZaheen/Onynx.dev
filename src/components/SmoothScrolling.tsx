@@ -9,6 +9,9 @@ interface SmoothScrollingProps {
 
 export default function SmoothScrolling({ children }: SmoothScrollingProps) {
   useEffect(() => {
+    // Reset scroll position to top on page load
+    window.scrollTo(0, 0);
+    
     // Don't initialize Lenis on mobile to prevent conflicts
     const isMobile = window.innerWidth <= 768;
     if (isMobile) {

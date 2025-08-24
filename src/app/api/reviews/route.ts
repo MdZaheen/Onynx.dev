@@ -4,7 +4,7 @@ import ReviewModel from '@/models/reviews.model';
 
 
 export async function POST(req:NextRequest){
-    const db = await dbConnect();
+    await dbConnect();
 
     const {username,review,rating,} = await req.json();
     try {
@@ -25,7 +25,8 @@ export async function POST(req:NextRequest){
             { status: 201 }
         );
         
-    } catch (error) {
+    } catch (serverError) {
+    console.error('Review creation error:', serverError);
     return NextResponse.json(
         { error: 'Failed to create review' },
         { status: 500 }

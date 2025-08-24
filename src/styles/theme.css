@@ -1,0 +1,112 @@
+/* Theme Variables & Design System */
+:root {
+  /* Brand Colors */
+  --brand-red: #A10000;
+  --brand-red-dark: #7D0000;
+  --brand-red-light: #C51A1A;
+  
+  /* Glass Morphism */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 20px;
+  
+  /* Gradients */
+  --brand-gradient: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
+  --glass-gradient: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  
+  /* Shadows */
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-hover: 0 15px 35px rgba(161, 0, 0, 0.3);
+  
+  /* Typography */
+  --font-primary: 'Lexend Exa', sans-serif;
+  
+  /* Animations */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Optimized Glass Card Base Style */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  transition: var(--transition-smooth);
+  will-change: transform, background, border-color, box-shadow;
+  transform: translate3d(0, 0, 0); /* Hardware acceleration */
+  contain: layout style;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(161, 0, 0, 0.3);
+  box-shadow: var(--shadow-hover);
+  transform: translate3d(0, -5px, 0);
+}
+
+/* Brand Button */
+.brand-button {
+  background: var(--brand-gradient);
+  color: white;
+  border: none;
+  transition: var(--transition-bounce);
+}
+
+.brand-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(161, 0, 0, 0.4);
+}
+
+/* Optimized Animated Background with hardware acceleration */
+.animated-bg {
+  background: radial-gradient(circle at 20% 80%, rgba(161, 0, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(161, 0, 0, 0.02) 0%, transparent 50%);
+  animation: gradientShift 8s ease-in-out infinite;
+  will-change: background-position;
+  transform: translate3d(0, 0, 0); /* Force hardware acceleration */
+  contain: layout style paint;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%, 100% 50%, 50% 0%;
+  }
+  50% {
+    background-position: 100% 50%, 0% 50%, 50% 100%;
+  }
+}
+
+/* Optimized Noise Texture Overlay */
+.noise-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+  contain: layout style paint;
+}
+
+/* Global Performance Optimizations */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -7,12 +7,6 @@ import Link from 'next/link';
 import About from '@/app/About/page';
 
 export default function HomePage() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white w-full relative">

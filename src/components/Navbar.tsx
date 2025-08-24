@@ -7,7 +7,6 @@ import styles from '@/styles/Navbar.module.css';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   // console.log('Current route:', pathname);
 
@@ -40,10 +39,8 @@ export default function Navbar() {
       const threshold = 20; // Reduced threshold for faster activation
       const navbar = document.querySelector(`.${styles.navbar}`);
       if (window.scrollY > threshold) {
-        setIsScrolled(true);
         navbar?.classList.add(styles['is-stuck']);
       } else {
-        setIsScrolled(false);
         navbar?.classList.remove(styles['is-stuck']);
       }
     };
