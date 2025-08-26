@@ -10,10 +10,7 @@ const About = () => {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-black text-white relative overflow-hidden font-[family-name:var(--font-primary)]">
-        {/* Animated Background */}
-        <div className="fixed inset-0 animated-bg" />
-        <div className="noise-overlay" />
+      <div className="min-h-screen bg-transparent text-white relative overflow-hidden font-[family-name:var(--font-primary)]">
       
         {/* Main Container */}
         <div className="about-container relative z-10 px-6 py-12 min-h-screen max-w-6xl mx-auto">

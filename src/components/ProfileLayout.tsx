@@ -55,9 +55,10 @@ const ProfileLayout: React.FC<ProfileLayoutProps> = ({ member }) => {
         initial="hidden"
         animate="visible"
       >
-      {/* Animated Background with Mask Effect */}
+      {/* Static Background with Mask Effect */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 animated-bg" />
+        <div className="absolute inset-0 static-bg" />
+        <div className="noise-overlay" />
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-red-900/20 to-black/80" />
         <div 
           className="absolute inset-0 bg-gradient-radial from-red-500/20 via-transparent to-transparent"

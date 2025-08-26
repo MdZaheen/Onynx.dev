@@ -5,11 +5,17 @@ import styles from '@/styles/Home.module.css';
 import Tagline from '@/components/Tagline';
 import Link from 'next/link';
 import About from '@/app/About/page';
+import ProjectsJourney from '@/components/ProjectsJourney';
+import '@/styles/theme.css';
 
 export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white w-full relative">
+      {/* Unified Background for About and Projects sections */}
+      <div className="fixed inset-0 static-bg" style={{ zIndex: -1 }} />
+      <div className="fixed inset-0 noise-overlay" style={{ zIndex: -1 }} />
+      
       {/* HOME SECTION */}
       <section id="home" className="min-h-screen">
         <main className={styles.container} data-animate="background">
@@ -66,6 +72,9 @@ export default function HomePage() {
       <section id="about" className="min-h-screen">
         <About />
       </section>
+
+      {/* PROJECTS SECTION */}
+      <ProjectsJourney />
     </div>
   );
 }
