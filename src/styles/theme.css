@@ -88,6 +88,49 @@
   contain: layout style paint;
 }
 
+/* Home-style Background (matches home section without image) */
+.home-style-bg {
+  background-color: #000000;
+  background: 
+    /* Dark overlay to simulate the image darkness */
+    linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(20, 20, 30, 0.9) 50%, rgba(0, 0, 0, 0.85) 100%),
+    /* Subtle texture gradients */
+    radial-gradient(ellipse at top left, rgba(161, 0, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(255, 255, 255, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at center, rgba(161, 0, 0, 0.05) 0%, transparent 70%),
+    /* Base black background */
+    #000000;
+  background-size: 100% 100%, 80% 80%, 60% 60%, 100% 100%, 100% 100%;
+  background-position: center, top left, bottom right, center, center;
+  transform: translate3d(0, 0, 0);
+  contain: layout style paint;
+}
+
+/* Home-style Background with pulse animation overlay */
+.home-style-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(161, 0, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(161, 0, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  animation: ambientPulse 8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes ambientPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
 /* Optimized Noise Texture Overlay */
 .noise-overlay {
   position: absolute;

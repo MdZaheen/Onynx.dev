@@ -12,8 +12,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-white w-full relative">
-      {/* Unified Background for About and Projects sections */}
-      <div className="fixed inset-0 static-bg" style={{ zIndex: -1 }} />
+      {/* Unified Home-style Background for About and Projects sections */}
+      <div className="fixed inset-0 home-style-bg" style={{ zIndex: -1 }} />
       <div className="fixed inset-0 noise-overlay" style={{ zIndex: -1 }} />
       
       {/* HOME SECTION */}
