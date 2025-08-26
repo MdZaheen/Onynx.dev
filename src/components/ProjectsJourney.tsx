@@ -1,9 +1,9 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
-import Image from 'next/image';
 import { projectsData, ProjectData } from '@/data/projects';
-import { ChevronDown, ChevronUp, ExternalLink, Github, Play, Calendar, Users, Code2 } from 'lucide-react';
+import { ChevronDown, ExternalLink, Github, Play, Calendar, Users, Code2 } from 'lucide-react';
+import ProjectSecrets from './ProjectSecrets';
 import '@/styles/About.css';
 import '@/styles/theme.css';
 
@@ -366,11 +366,11 @@ const ProjectsJourney: React.FC = () => {
                   <TimelineNode index={index} isActive={index <= currentProject} />
                 </div>
 
-                {/* Project Card */}
+                {/* Project Card & Secrets Layout */}
                 <div className={`md:grid md:grid-cols-2 md:gap-12 items-start ${
                   index % 2 === 0 ? '' : 'md:grid-flow-col-dense'
                 } pl-16 md:pl-0`}>
-                  {/* Card */}
+                  {/* Main Project Card */}
                   <div className={index % 2 === 0 ? 'md:col-start-1' : 'md:col-start-2'}>
                     <ProjectCard 
                       project={project} 
@@ -379,10 +379,25 @@ const ProjectsJourney: React.FC = () => {
                     />
                   </div>
                   
-                  {/* Spacer for desktop zig-zag */}
+                  {/* Project Secrets - Desktop */}
                   <div className={`hidden md:block ${
                     index % 2 === 0 ? 'md:col-start-2' : 'md:col-start-1'
-                  }`} />
+                  }`}>
+                    <ProjectSecrets
+                      project={project}
+                      index={index}
+                      isLeft={index % 2 !== 0} // Opposite of main card
+                    />
+                  </div>
+                  
+                  {/* Project Secrets - Mobile (stacked below card) */}
+                  <div className="md:hidden mt-8 w-full max-w-sm mx-auto">
+                    <ProjectSecrets
+                      project={project}
+                      index={index}
+                      isLeft={true} // Always left-aligned on mobile
+                    />
+                  </div>
                 </div>
               </div>
             ))}
@@ -400,7 +415,7 @@ const ProjectsJourney: React.FC = () => {
           className="text-center mt-20"
         >
           <h3 className="text-2xl font-bold mb-4">Ready to Start Your Own Journey?</h3>
-          <p className="text-gray-400 mb-8">Let's collaborate on something amazing together</p>
+          <p className="text-gray-400 mb-8">Let&apos;s collaborate on something amazing together</p>
           <button className="brand-button px-8 py-3 rounded-full font-semibold">
             Get In Touch
           </button>
