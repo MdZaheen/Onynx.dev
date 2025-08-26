@@ -6,6 +6,7 @@ import Tagline from '@/components/Tagline';
 import Link from 'next/link';
 import About from '@/app/About/page';
 import ProjectsJourney from '@/components/ProjectsJourney';
+import ContactPage from '@/app/Contact/page';
 import '@/styles/theme.css';
 
 export default function HomePage() {
@@ -75,6 +76,11 @@ export default function HomePage() {
 
       {/* PROJECTS SECTION */}
       <ProjectsJourney />
+
+      {/* CONTACT SECTION */}
+      <section id="contact" className="min-h-screen">
+        <ContactPage />
+      </section>
     </div>
   );
 }

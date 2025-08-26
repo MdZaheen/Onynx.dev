@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useMemo, useCallback, useRef } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { team } from '@/data/team'
 import TeamCard from './TeamCard'
 import ExpandedPanel from './ExpandedPanel'
@@ -61,16 +61,21 @@ const TeamSection = () => {
             {/* Expanded Panel with AnimatePresence for smooth exit */}
             <AnimatePresence mode="wait">
               {expandedMember === member.id && (
-                <div 
+                <motion.div 
                   ref={(el) => {
                     expandedRefs.current[member.id] = el
                   }}
+                  initial={{ opacity: 0, height: 0, y: -20 }}
+                  animate={{ opacity: 1, height: 'auto', y: 0 }}
+                  exit={{ opacity: 0, height: 0, y: -20 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  style={{ overflow: 'hidden' }}
                 >
                   <ExpandedPanel
                     member={member}
                     isVisible={expandedMember === member.id}
                   />
-                </div>
+                </motion.div>
               )}
             </AnimatePresence>
           </div>
