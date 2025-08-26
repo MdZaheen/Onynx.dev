@@ -11,8 +11,8 @@ interface ExpandedPanelProps {
 
 const ExpandedPanel = memo<ExpandedPanelProps>(({ member, isVisible }) => {
   return (
-    <div className="mt-4 opacity-0 animate-[fadeInUp_0.3s_ease-out_forwards]">
-      <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden">
+    <div className="mt-4">
+      <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden transition-all duration-300 ease-out">
         {/* Simplified Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-red-500/3 to-red-700/3 rounded-2xl" />
 

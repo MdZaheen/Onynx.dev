@@ -416,7 +416,22 @@ const ProjectsJourney: React.FC = () => {
         >
           <h3 className="text-2xl font-bold mb-4">Ready to Start Your Own Journey?</h3>
           <p className="text-gray-400 mb-8">Let&apos;s collaborate on something amazing together</p>
-          <button className="brand-button px-8 py-3 rounded-full font-semibold">
+          <button 
+            className="brand-button px-8 py-3 rounded-full font-semibold"
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+                // Focus on chat input after scrolling
+                setTimeout(() => {
+                  const chatInput = document.querySelector('#contact input[type="text"]') as HTMLInputElement;
+                  if (chatInput) {
+                    chatInput.focus();
+                  }
+                }, 1000); // Wait for scroll to complete
+              }
+            }}
+          >
             Get In Touch
           </button>
         </motion.div>

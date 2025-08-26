@@ -45,6 +45,12 @@ export default function RootLayout({
               if ('scrollRestoration' in history) {
                 history.scrollRestoration = 'manual';
               }
+              // Scroll to top on page load
+              window.addEventListener('load', function() {
+                window.scrollTo(0, 0);
+              });
+              // Also scroll to top immediately
+              window.scrollTo(0, 0);
             `,
           }}
         />

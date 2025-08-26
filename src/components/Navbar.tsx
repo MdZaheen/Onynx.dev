@@ -112,13 +112,18 @@ export default function Navbar() {
         </button>
       </li>
       <li className={styles.navItem}>
-        <Link 
-          href="/projects" 
-          className={`${styles.navLink} ${pathname === '/projects' ? styles.active : ''}`} 
-          onClick={() => setIsMenuOpen(false)}
+        <button 
+          onClick={() => {
+            setIsMenuOpen(false);
+            const element = document.getElementById('projects');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className={styles.navLink}
         >
           Projects
-        </Link>
+        </button>
       </li>
       <li className={styles.navItem}>
         <button 
