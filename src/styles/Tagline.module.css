@@ -4,37 +4,57 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 1rem;
   font-family: 'Lexend', sans-serif;
   z-index: 10;
   flex-shrink: 0;
   animation: fadeIn 0.8s ease-in-out;
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
 }
 
 .designedText, 
-.inDarkText {
-  font-size: 18px;
-  letter-spacing: 0.5px;
+.inDarkText,
+.slashRed,
+.slashWhite {
+  font-size: 1.143rem;
+  letter-spacing: 1px;
   margin: 0;
   padding: 0;
-  line-height: 1.2;
+  line-height: 1;
+  display: inline-block;
 }
 
 .designedText {
   color: #FFFFFF;
-  font-weight: 400;
+  font-weight: 800;
 }
 
 .inDarkText {
   color: #A10000;
-  font-weight: 500;
+  font-weight: 300;
+  padding-left: 2.5rem;
+  display: inline-block;
+}
+
+.slashRed {
+  color: #A10000;
+  font-weight: 300;
+}
+
+.slashWhite {
+  color: #FFFFFF;
+  font-weight: 300;
 }
 
 .timeText {
-  font-size: 14px;
+  font-size: 0.857rem;
   color: #FFFFFF;
   font-weight: 400;
   margin: 0;
-  padding-top: 4px;
+  margin-top: 0.5rem;
+  margin-left: 4rem;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -44,30 +64,17 @@
 .timeDigit {
   position: relative;
   display: inline-block;
-  background-color: #000;
   color: #ff0055;
-  border-radius: 3px;
-  padding: 2px 4px;
   margin: 0 1px;
   font-family: 'Lexend', sans-serif;
   font-weight: 600;
-  box-shadow: 0 0 5px #ff0055, 0 0 10px rgba(255, 0, 85, 0.5);
+  font-size: 0.857rem;
   text-shadow: 0 0 5px #ff0055;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
 }
 
-.timeDigit::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 0, 85, 0.1), transparent 80%);
-  pointer-events: none;
-  border-radius: 3px;
-}
+
 
 .timeDigit.flip {
   animation: flip 0.5s ease-in-out;
@@ -114,9 +121,8 @@
 @media (max-width: 768px) {
   .taglineContainer {
     position: absolute;
-    top: 50%;
+    top: 1rem;
     right: 3.5rem;
-    transform: translateY(-50%);
     margin: 0;
     z-index: 10;
   }

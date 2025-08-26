@@ -1,151 +1,39 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React from 'react'
+import { motion, MotionConfig } from 'framer-motion'
 import '@/styles/About.css'
-import Navbar from '@/components/Navbar'
+import '@/styles/theme.css'
 
-import TeamNameFlipper from '@/components/ui/team-name-flipper'
-// import { TextScroll } from '../components/ui/text-scroll'
+import { TeamSection } from '@/components/team'
 
 const About = () => {
-  const [cursor, setCursor] = useState({ x: 0, y: 0 })
-  const [activeMember, setActiveMember] = useState<string | null>(null)
-  const animationRef = useRef<number | null>(null)
-
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLDivElement>,
-    member: string
-  ) => {
-    // Cancel the previous animation frame to avoid stacking
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current)
-    }
-
-    // Throttle mouse movement with requestAnimationFrame
-    animationRef.current = requestAnimationFrame(() => {
-      const container = document.querySelector('.about-container') as HTMLElement
-      if (!container) return
-
-      const rect = container.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
-
-      setCursor({ x, y })
-      setActiveMember(member)
-    })
-  }
-
-  const handleMouseLeave = () => {
-    setActiveMember(null)
-  }
-
-  const getTooltip = () => {
-    if (!activeMember) return null
-
-    const memberData = {
-      zaheen: {
-        title: 'The Silent Strategist',
-        text: 'A creative thinker who loves to design.',
-      },
-      arfath: {
-        title: 'The Backend Brain',
-        text: 'Knows how to make servers sing.',
-      },
-      mannan: {
-        title: 'The Pixel Perfectionist',
-        text: 'Frontend wizard',
-      },
-    }
-
-    const data = memberData[activeMember as keyof typeof memberData]
-
-    return (
-
-      <div
-        className="team-info"
-        style={{
-          top: cursor.y + 20,
-          left: cursor.x + 20,
-        }}
-      >
-        <h3 className="team-subtitle">{data.title}</h3>
-        <p className="team-description glitch-text" data-text={data.text}>
-          {data.text}
-        </p>
-      </div>
-    )
-  }
 
   return (
-  
-    <div className="about-container">
-        <Navbar />
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-transparent text-white relative overflow-hidden font-[family-name:var(--font-primary)]">
+      
+        {/* Main Container */}
+        <div className="about-container relative z-10 px-6 py-12 min-h-screen max-w-6xl mx-auto">
+          {/* Interactive Team Section */}
+          <TeamSection />
 
-      {/* ✅ TextScroll moved above team-container */}
-      {/* <TextScroll className="text-scroll" text="We are creative developers" /> */}
-
-      <div className="team-container">
-        {/* ZAHEEN */}
-        <div
-          className="team-member"
-          onMouseMove={(e) => handleMouseMove(e, 'zaheen')}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="member-name">
-            <TeamNameFlipper href="/Zaheen">ZAHEEN</TeamNameFlipper>
-          </div>
-          <div className="member-image member-image-zaheen">
-            <img src="/images/zaheen.png" alt="Zaheen" />
-          </div>
-        </div>
-
-        <div className="separator"></div>
-
-        {/* ARFATH */}
-        <div
-          className="team-member"
-          onMouseMove={(e) => handleMouseMove(e, 'arfath')}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="member-name">
-            <TeamNameFlipper href="https://github.com/arfath-ahmed">ARFATH</TeamNameFlipper>
-          </div>
-          <div className="member-image member-image-arfath">
-            <img src="/images/arfath.png" alt="Arfath" />
-          </div>
-        </div>
-
-        <div className="separator"></div>
-
-        {/* MANNAN */}
-        <div
-          className="team-member"
-          onMouseMove={(e) => handleMouseMove(e, 'mannan')}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="member-name">
-            <TeamNameFlipper href="https://github.com/Mannan007">MANNAN</TeamNameFlipper>
-          </div>
-          <div className="member-image member-image-mannan">
-            <img src="/images/mannan.png" alt="Mannan" />
-          </div>
+          {/* About Company Section */}
+          <motion.div 
+            className="text-center max-w-4xl mx-auto glass-card rounded-2xl p-8 mt-16"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
+            <h2 className="text-3xl font-bold text-red-400 mb-6">About Onyx</h2>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              We are a team of creative developers who love to build innovative solutions together. 
+              Passionate about cutting-edge technology, clean code, and user-centric design. 
+              We&apos;re always looking for new ways to push boundaries and create exceptional digital experiences.
+            </p>
+          </motion.div>
         </div>
       </div>
-
-      {/* ABOUT US SECTION */}
-      <div className="info">
-        <h2>About Us</h2>
-        <p>
-          We are a team of creative developers who love to build things together. We are always
-          looking for new ways to improve our skills and stay ahead of the curve.
-        </p>
-      </div>
-
-      {/* HOVER TOOLTIP */}
-      {getTooltip()}
-
-      {/* Background */}
-      <div className="background-pattern"></div>
-    </div>
+    </MotionConfig>
   )
 }
 

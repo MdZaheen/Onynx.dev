@@ -3,15 +3,27 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from '../styles/Tagline.module.css';
 
-const Tagline = () => {
+interface TaglineProps {
+  'data-animate'?: string;
+}
+
+const Tagline = (props: TaglineProps) => {
   const [currentTime, setCurrentTime] = useState('');
   const [prevTime, setPrevTime] = useState('');
+  const [isClient, setIsClient] = useState(false);
   const hourFirstRef = useRef<HTMLSpanElement>(null);
   const hourSecondRef = useRef<HTMLSpanElement>(null);
   const minuteFirstRef = useRef<HTMLSpanElement>(null);
   const minuteSecondRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    // Mark as client-side to prevent hydration mismatch
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return; // Only run on client side
+    
     // Function to update the time in IST format (UTC+5:30)
     const updateTime = () => {
       const now = new Date();
@@ -65,10 +77,24 @@ const Tagline = () => {
 
     // Clean up interval on component unmount
     return () => clearInterval(interval);
-  }, [currentTime, prevTime]);
+  }, [currentTime, prevTime, isClient]);
 
   // Split time into individual characters for styling
   const renderStylizedTime = () => {
+    // Show loading state during hydration
+    if (!isClient) {
+      return (
+        <>
+          <span className={styles.timeLabel}>IST</span>
+          <span className={styles.timeDigit}>-</span>
+          <span className={styles.timeDigit}>-</span>
+          <span className={styles.timeSeparator}>:</span>
+          <span className={styles.timeDigit}>-</span>
+          <span className={styles.timeDigit}>-</span>
+        </>
+      );
+    }
+
     if (!currentTime || currentTime.length !== 5) return null;
     
     const [hours, minutes] = currentTime.split(':');
@@ -86,10 +112,20 @@ const Tagline = () => {
   };
 
   return (
-    <div className={styles.taglineContainer}>
-      <p className={styles.designedText}>// Designed</p>
-      <p className={styles.inDarkText}>in Darkness //</p>
-      <p className={styles.timeText}>{renderStylizedTime()}</p>
+    <div className={styles.taglineContainer} {...props}>
+      <div className={styles.taglineText}>
+        <div>
+          <span className={styles.slashRed}>{'//'}</span>
+          <span className={styles.designedText}> Designed</span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div>
+            <span className={styles.inDarkText}>in Darkness</span>
+            <span className={styles.slashWhite}> {'//'}</span>
+          </div>
+          <div className={styles.timeText}>{renderStylizedTime()}</div>
+        </div>
+      </div>
     </div>
   );
 };

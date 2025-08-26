@@ -1,26 +1,3 @@
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1200;
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  transition: all 0.3s ease;
-}
-
-/* Scrolled state for sticky navbar */
-.scrolled {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
 .navList::before {
   content: '';
   position: absolute;
@@ -48,15 +25,18 @@
   justify-content: center;
   padding: 0.5rem 1.5rem;
   max-width: 500px;
-  /* Enhanced glassmorphism effect */
-  background: rgba(20, 20, 20, 0.7);
+  background: rgba(20, 20, 20, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(255, 255, 255, 0.05);
-  border-radius: 25px;
-  position: relative;
+  border-radius: 50px;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   transition: all 0.3s ease;
+  margin: 0;
 }
 
 .navItem {
@@ -70,54 +50,44 @@
   font-weight: 500;
   padding: 0.6rem 1.2rem;
   border-radius: 20px;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   display: block;
   text-transform: capitalize;
   position: relative;
   overflow: hidden;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .navLink::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 8px;
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #ff0000, #A10000);
-  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #ff0000, #ff3333, #ff0000);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform: translateX(-50%);
+  border-radius: 1px;
 }
 
 .navLink:hover {
   color: #ff3333;
-  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
-  transform: translateY(-1px);
 }
 
 .navLink:hover::after {
   width: 80%;
+  background: linear-gradient(90deg, #ff0000, #ff3333, #ff0000);
 }
 
-.active {
-  position: relative;
+.navLink:active {
+  color: #ff0000;
 }
 
-.active::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(90deg, #ff0000, #A10000);
-  transform: translateX(-50%);
-}
-
-.navLink.active:hover {
-  color: #ff3333;
-  text-shadow: 0 0 8px rgba(255, 51, 51, 0.5);
-}
+/* Active state removed - effects only show on hover */
 
 /* Menu Button Styles */
 .menuButton {
@@ -129,10 +99,24 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 8px;
   z-index: 1001;
   position: relative;
   margin-right: 10px;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.menuButton:hover {
+  background: rgba(161, 0, 0, 0.1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(161, 0, 0, 0.2);
+}
+
+.menuButton:hover span {
+  background-color: #ff3333;
+  box-shadow: 0 0 10px rgba(255, 51, 51, 0.6);
+  transform: scaleX(1.1);
 }
 
 .menuButton span {
@@ -140,8 +124,8 @@
   height: 3px;
   background-color: #A10000;
   border-radius: 3px;
-  transition: all 0.3s ease;
-  transform-origin: 1px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
   box-shadow: 0 0 5px rgba(161, 0, 0, 0.5);
 }
 
@@ -232,5 +216,161 @@
 
   .menuButton span {
     height: 2px;
+  }
+}
+
+/* Modern Navbar Entrance Animations */
+.navbar {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: none;
+  will-change: transform, opacity;
+}
+
+.navbar.animate-in {
+  animation: nav-entrance 360ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+@keyframes nav-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(.98);
+    filter: none;
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(6px) scale(1);
+    filter: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: none;
+  }
+}
+
+/* Staggered Nav Link Reveals */
+.navItem {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.navItem.link-in {
+  animation: link-entrance 420ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+@keyframes link-entrance {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Active Link Pulse */
+.navLink.active.pulse {
+  animation: active-pulse 900ms cubic-bezier(.22,.9,.32,1) forwards;
+}
+
+@keyframes active-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Enhanced Sticky State */
+.navbar.is-stuck {
+  transform: translateY(0) scale(1);
+  transition: transform 300ms cubic-bezier(.22,.9,.32,1), opacity 300ms ease;
+  opacity: 1;
+  backdrop-filter: none;
+}
+
+.navbar.is-stuck .navList {
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: none;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 1.2rem;
+  transition: all 300ms cubic-bezier(.22,.9,.32,1);
+}
+
+/* Enhanced Hover & Focus Animations */
+.navLink {
+  position: relative;
+}
+
+.navLink:focus {
+  outline: none;
+  outline-offset: 0;
+  border-radius: 4px;
+  transition: none;
+}
+
+/* Logo Hover Enhancement - targeting parent logo if exists */
+.navbar + * [class*="logo"],
+.navbar ~ * [class*="logo"] {
+  transition: transform 160ms cubic-bezier(.22,.9,.32,1);
+}
+
+.navbar + * [class*="logo"]:hover,
+.navbar ~ * [class*="logo"]:hover {
+  transform: translateY(-2px);
+}
+
+/* Performance Optimizations */
+.navbar,
+.navItem,
+.navLink {
+  will-change: transform, opacity;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar.animate-in,
+  .navItem,
+  .navItem.link-in,
+  .navLink.active.pulse,
+  .navbar.is-stuck,
+  .navLink,
+  .navLink::after,
+  .navbar + * [class*="logo"],
+  .navbar ~ * [class*="logo"] {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .navbar {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  
+  .navItem {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 720px) {
+  .navbar.animate-in {
+    animation-duration: 280ms;
+  }
+  
+  @keyframes nav-entrance {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px) scale(.99);
+      filter: none;
+    }
+    70% {
+      opacity: 1;
+      transform: translateY(4px) scale(1);
+      filter: none;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: none;
+    }
   }
 }

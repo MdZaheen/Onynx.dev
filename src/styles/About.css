@@ -1,216 +1,11 @@
-/* Base Container */
-.about-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  background-color: black;
-  color: white;
-  overflow: hidden;
-  position: relative;
-  font-family: Arial, sans-serif;
-  /* background-image: url('/images/background.png'); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
- font-family: 'Lexend Exa';
-}
+/* Essential styles for About page - most styles moved to Tailwind classes */
+
+/* Global font family */
 * {
   font-family: 'Lexend Exa', sans-serif;
 }
-.info{
-  position: absolute;
-  height: 17%;
-  width: 70%;
-  top: 81%;
-  left: 16%;
 
-  
-  background-color: rgba(63, 63, 63, 0.195);
-  padding: 15px;
-  border-radius: 10px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
-  z-index: 2;
-  font-style: italic;
-}
-.info h2{
-  font-size: 24px;
-  margin-bottom: 0px;
-  /* background-color: rgba(240, 248, 255, 0);   */
-  color: rgb(145, 0, 0);
-  text-align: center;
-  padding: 0px;
-  font-weight: bold;
-  font-family: 'Lexend Exa', sans-serif;
-  font-size: 25px;
-}
-/* Team Layout */
-.team-container {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-
-
-.team-member {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.separator {
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6), rgba(255,255,255,0));
-  z-index: 2;
-}
-
-/* Names */
-.member-name {
-  position: absolute;
-  top: 170px;
-  left: 10%;
-  z-index: 99;
-  cursor: pointer;
-  font-family: 'Lexend Exa', sans-serif;
-}
-
-/* Background Pattern */
-.background-pattern {
-  position: absolute;
-  inset: 0;
-  background-image: url('/images/background.jpg');  
-  opacity: 0.4;
-  pointer-events: none;
-  z-index: 0;
-  filter: grayscale(10%) brightness(65%);
-  left: 1%;
-}
-
-/* Member Image */
-.member-image {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-.member-image:hover img {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  transition: all 0.4s ease;
-}
-
-.member-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 5px;
-  transition: all 0.4s ease;
-}
-
-/* Individual image filters */
-.member-image-zaheen img {
-  width: 80%;
-  height: auto;
-  filter: grayscale(70%) brightness(90%) sepia(20%) hue-rotate(100deg);
-  position: relative;
-  top: 15%;
-}
-.member-image-zaheen:hover img {
-  filter: grayscale(0%) brightness(110%) sepia(20%) hue-rotate(100deg);
-}
-
-.member-image-mannan img {
-  width: 97%;
-  height: auto;
-  filter: grayscale(100%) brightness(75%) sepia(20%) hue-rotate(100deg);
-  position: relative;
-  top: -1%;
-}
-.member-image-mannan:hover img {
-  filter: grayscale(0%) brightness(100%) saturate(0%);
-}
-
-.member-image-arfath img {
-  width: 95%;
-  height: auto;
-  filter: grayscale(60%) brightness(80%) sepia(20%) hue-rotate(100deg);
-  position: relative;
-  top: 18%;
-}
-.member-image-arfath:hover img {
-  filter: grayscale(0%) brightness(90%) sepia(20%) hue-rotate(100deg);
-}
-.about-container {
-  position: relative;
-  overflow: visible !important; /* ✅ FIXED */
-}
-
-.team-container {
-  position: relative;
-}
-.team-subtitle {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: rgb(127, 0, 0);
-}
-.team-info {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 12px 16px;
-  border-radius: 10px;
-  color: white;
-  z-index: 999;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  min-width: 360px;
-  max-width: 250px;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: top 0.1s ease, left 0.1s ease;
-}
-
-/* Glitch styles from earlier remain same */
-
-
-/* Glitch Text Effect */
-.glitch-text {
-  position: relative;
-  font-weight: bold;
-  font-size: 14px;
-  text-transform: uppercase;
-  animation: glitch 1.5s infinite;
-  font-family: 'Lexend Exa', sans-serif;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  color: rgb(43, 43, 43);
-  background: transparent;
-  clip: rect(0, 0, 0, 0);
-}
-
-.glitch-text::before {
-  color: rgb(140, 8, 8);
-  animation: glitchTop 2s infinite linear;
-}
-.glitch-text::after {
-  color: rgb(0, 0, 0);
-  animation: glitchBottom 2s infinite linear;
-}
-
+/* Preserve only essential keyframe animations that can't be done with Tailwind */
 @keyframes glitch {
   0% {
     text-shadow: 2px 0 rgb(168, 168, 168), -2px 0 blue;
@@ -266,4 +61,36 @@
     clip: rect(0, 9999px, 0, 0);
     transform: translate(0, 0);
   }
+}
+
+/* Glitch Text Effect - used in tooltips */
+.glitch-text {
+  position: relative;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  animation: glitch 1.5s infinite;
+  font-family: 'Lexend Exa', sans-serif;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: rgb(43, 43, 43);
+  background: transparent;
+  clip: rect(0, 0, 0, 0);
+}
+
+.glitch-text::before {
+  color: rgb(140, 8, 8);
+  animation: glitchTop 2s infinite linear;
+}
+
+.glitch-text::after {
+  color: rgb(0, 0, 0);
+  animation: glitchBottom 2s infinite linear;
 }

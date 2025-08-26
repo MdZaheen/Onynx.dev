@@ -1,7 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-
-export interface User extends Document {
+export interface Review extends Document {
   username?: string;
   rating: number;
   review: string;
@@ -31,12 +30,12 @@ const ReviewsSchema = new mongoose.Schema({
  date:{
     type:Date,
     required:true,
-    default:Date.now()
+    default:Date.now
  }
 });
 
 const ReviewsModel =
-  (mongoose.models.Reviews as mongoose.Model<User>) ||
-  mongoose.model<User>('Reviews', ReviewsSchema);
+  (mongoose.models.Reviews as mongoose.Model<Review>) ||
+  mongoose.model<Review>('Reviews', ReviewsSchema);
 
 export default ReviewsModel;

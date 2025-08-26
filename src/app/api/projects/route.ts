@@ -1,6 +1,6 @@
 import dbConnect from "@/app/lib/dbconnect";
 import ProjectModel from "@/models/projects.model";
-import { uploadImageToCloudinary } from "@/utils/clodinary"; // Import reusable upload function
+import { uploadImageToCloudinary } from "@/utils/cloudinary"; // Import reusable upload function
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -24,15 +24,14 @@ export async function POST(req: NextRequest) {
 
     // Initialize image variables
     let imageUrl = null;
-    let imagePublicId = null;
 
     // If image provided, upload using utility function
     if (imageFile && imageFile.size > 0) {
       try {
-        const { secure_url, public_id } = await uploadImageToCloudinary(imageFile);
+        const { secure_url } = await uploadImageToCloudinary(imageFile);
         imageUrl = secure_url;
-        imagePublicId = public_id;
-      } catch (error) {
+      } catch (uploadError) {
+        console.error('Image upload error:', uploadError);
         return NextResponse.json(
           { error: "Image upload failed" },
           { status: 500 }
@@ -40,7 +39,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Create and save project
+    // Create project
     const project = await ProjectModel.create({
       title,
       description,
@@ -48,7 +47,6 @@ export async function POST(req: NextRequest) {
       image: imageUrl,
       // imagePublicId,
     });
-    await project.save();
     console.log('Project created:', project);
 
     return NextResponse.json({ success: true, project }, { status: 201 });
