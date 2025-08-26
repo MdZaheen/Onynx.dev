@@ -121,13 +121,24 @@ export default function Navbar() {
         </Link>
       </li>
       <li className={styles.navItem}>
-        <Link 
-          href="/contact" 
-          className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} 
-          onClick={() => setIsMenuOpen(false)}
+        <button 
+          onClick={() => {
+            setIsMenuOpen(false);
+            // Check if we're on the home page
+            if (pathname === '/') {
+              const element = document.getElementById('contact');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            } else {
+              // Navigate to contact page if not on home page
+              window.location.href = '/#contact';
+            }
+          }}
+          className={styles.navLink}
         >
           Contact
-        </Link>
+        </button>
       </li>
     </ul>
   );
