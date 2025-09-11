@@ -8,17 +8,6 @@ import styles from '@/styles/Navbar.module.css';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  // console.log('Current route:', pathname);
-
-
-  // ❌ Pages where you want to hide the Navbar
-  // const hiddenRoutes = ['/routes/AboutDetailZaheen'];
-
-
-  // // ✅ Don't render Navbar on hidden routes
-  // if (hiddenRoutes.includes(pathname)) {
-  //   return null;
-  // }
 
   // Disable body scroll when menu is open
   useEffect(() => {
@@ -136,8 +125,15 @@ export default function Navbar() {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             } else {
-              // Navigate to contact page if not on home page
-              window.location.href = '/#contact';
+              // Navigate to home page first, then scroll to contact after load
+              window.location.href = '/';
+              // Use a timeout to scroll to contact after page loads
+              setTimeout(() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 1000);
             }
           }}
           className={styles.navLink}

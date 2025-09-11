@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import nodemailer from 'nodemailer';
 
 interface ContactFormData {
   name: string;
@@ -27,79 +28,52 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Here you can integrate with your preferred email service:
-    
-    // Option 1: Using Nodemailer (install: npm install nodemailer @types/nodemailer)
-    /*
-    const nodemailer = require('nodemailer');
-    
-    const transporter = nodemailer.createTransporter({
-      service: 'gmail', // or your email service
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+    // Email service implementation
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      try {
+        const transporter = nodemailer.createTransporter({
+          service: 'gmail',
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+          },
+        });
 
-    const mailOptions = {
-      from: email,
-      to: process.env.CONTACT_EMAIL || 'contact@onyxdev.com',
-      subject: `New Contact Form Submission from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-    };
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: process.env.CONTACT_EMAIL || 'contact@onynx.dev',
+          replyTo: email,
+          subject: `New Contact Form Submission from ${name}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #A10000; border-bottom: 2px solid #A10000; padding-bottom: 10px;">New Contact Form Submission</h2>
+              <div style="background: #f9f9f9; padding: 20px; margin: 20px 0; border-radius: 8px;">
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
+              </div>
+              <div style="background: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+                <h3>Message:</h3>
+                <p style="line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
+              </div>
+            </div>
+          `,
+        };
 
-    await transporter.sendMail(mailOptions);
-    */
-
-    // Option 2: Using Resend (install: npm install resend)
-    /*
-    import { Resend } from 'resend';
-    
-    const resend = new Resend(process.env.RESEND_API_KEY);
-
-    await resend.emails.send({
-      from: 'contact@onyxdev.com',
-      to: [process.env.CONTACT_EMAIL || 'contact@onyxdev.com'],
-      subject: `New Contact Form Submission from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-      `,
-    });
-    */
-
-    // Option 3: Using EmailJS (client-side, no backend needed)
-    // See integration example in the component
-
-    // For now, just log the data (replace with your actual email service)
-    console.log('Contact form submission:', {
-      name,
-      email,
-      message,
-      timestamp: new Date().toISOString(),
-    });
-
-    // Option 4: Save to database (if you have one)
-    /*
-    // Example with MongoDB/Mongoose
-    const Contact = require('@/models/Contact');
-    const newContact = new Contact({
-      name,
-      email,
-      message,
-      submittedAt: new Date(),
-    });
-    await newContact.save();
-    */
+        await transporter.sendMail(mailOptions);
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Still return success but log the error
+      }
+    } else {
+      // Log the submission if email is not configured
+      console.log('Contact form submission (email not configured):', {
+        name,
+        email,
+        message,
+        timestamp: new Date().toISOString(),
+      });
+    }
 
     return NextResponse.json(
       { 

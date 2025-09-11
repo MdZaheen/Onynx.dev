@@ -8,8 +8,8 @@ import Navbar from '@/components/Navbar'
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname()
 
-  // Paths where Navbar should be hidden
-  const hideNavbarRoutes = ['@/app/routes/AboutDetailZaheen/page'] // Add any other paths here
+  // Paths where you want to hide the Navbar
+  const hideNavbarRoutes: string[] = [] // Add any other paths here
 
   const showNavbar = !hideNavbarRoutes.includes(pathname)
 

@@ -1,12 +1,18 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 // TypeScript interface for a project
-export interface Project extends Document {
+export interface IProject {
   title: string;
   description: string;
   tags?: string[];
   projectLink: string;
-  image?:string;
+  image?: string;
+}
+
+export interface Project extends IProject, Document {
+  _id: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // Mongoose schema for projects
