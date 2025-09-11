@@ -47,7 +47,7 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
       });
     };
 
-    // Master animation sequence
+    // Master animation sequence with enhanced effects
     const runPageEntranceAnimation = () => {
       // Get all elements
       const body = document.body;
@@ -73,63 +73,98 @@ export default function PageAnimator({ children }: PageAnimatorProps) {
       const eleganceText = document.querySelector('[data-animate="elegance"]');
       const samuraiImage = document.querySelector('[data-animate="samurai"]');
       const creativeCoders = document.querySelector('[data-animate="creative-coders"]');
+      const terminalTexts = document.querySelectorAll('.terminalText p');
 
       // Initialize all elements as hidden
-      // Don't disable overflow completely to work with Lenis
       body.style.cursor = 'wait';
+      body.style.pointerEvents = 'none';
 
-      // Start the sequence with optimized timing
+      // Enhanced animation sequence with stagger effects
       setTimeout(() => {
-        // 1. Page container fade in (immediate)
+        // 1. Page container with dramatic entrance (immediate)
         pageContainer?.classList.add('animate-page-in');
         
-        // 2. Background image reveal (100ms delay)
+        // 2. Background image with parallax effect (50ms delay)
         setTimeout(() => {
           backgroundImage?.classList.add('animate-bg-in');
-        }, 100);
+        }, 50);
 
-        // 3. Logo slide in (200ms delay)
+        // 3. Logo with magnetic slide (150ms delay)
         setTimeout(() => {
           logo?.classList.add('animate-logo-in');
-        }, 200);
+          // Add a subtle glow effect on logo appearance
+          if (logo instanceof HTMLElement) {
+            logo.style.textShadow = '0 0 20px rgba(161, 0, 0, 0.5)';
+            setTimeout(() => {
+              logo.style.textShadow = '';
+            }, 1000);
+          }
+        }, 150);
 
-        // 4. Tagline slide in (350ms delay)
+        // 4. Tagline with typewriter effect (300ms delay)
         setTimeout(() => {
           tagline?.classList.add('animate-tagline-in');
-        }, 350);
+        }, 300);
 
-        // 5. Main heading scale up (500ms delay)
+        // 5. Main heading with impact scale (450ms delay)
         setTimeout(() => {
           mainHeading?.classList.add('animate-heading-in');
-        }, 500);
+          // Add screen shake effect for impact
+          if (mainHeading instanceof HTMLElement) {
+            mainHeading.classList.add('animate-screen-shake');
+            setTimeout(() => {
+              mainHeading.classList.remove('animate-screen-shake');
+            }, 600);
+          }
+        }, 450);
 
-        // 6. Sub heading fade up (650ms delay)
+        // 6. Sub heading with elegant fade (600ms delay)
         setTimeout(() => {
           subHeading?.classList.add('animate-subheading-in');
-        }, 650);
+        }, 600);
 
-        // 7. Samurai image reveal (800ms delay - moved earlier)
+        // 7. Terminal text with sequential typewriter (700ms delay)
+        setTimeout(() => {
+          terminalTexts.forEach((line, index) => {
+            setTimeout(() => {
+              line.classList.add('animate-terminal-line');
+            }, index * 200);
+          });
+        }, 700);
+
+        // 8. Samurai image with dramatic entrance (1000ms delay)
         setTimeout(() => {
           samuraiImage?.classList.add('animate-samurai-in');
-        }, 800);
-
-        // 8. Elegance text float in (1000ms delay)
-        setTimeout(() => {
-          eleganceText?.classList.add('animate-elegance-in');
+          // Add particle effect around samurai
+          if (samuraiImage instanceof HTMLElement) {
+            samuraiImage.style.filter = 'drop-shadow(0 0 30px rgba(161, 0, 0, 0.3))';
+          }
         }, 1000);
 
-        // 9. Creative coders slide in (1150ms delay)
+        // 9. Creative coders with magnetic slide (1200ms delay)
         setTimeout(() => {
           creativeCoders?.classList.add('animate-coders-in');
-        }, 1150);
+        }, 1200);
 
-        // 10. Remove loading state (1500ms delay - shortened)
+        // 10. Elegance text with floating effect (1400ms delay)
+        setTimeout(() => {
+          eleganceText?.classList.add('animate-elegance-in');
+        }, 1400);
+
+        // 11. Final reveal - enable interactions (1800ms delay)
         setTimeout(() => {
           body.style.overflow = 'auto';
           body.style.cursor = 'default';
-        }, 1500);
+          body.style.pointerEvents = 'auto';
+          
+          // Add completion pulse effect
+          document.documentElement.classList.add('animate-completion-pulse');
+          setTimeout(() => {
+            document.documentElement.classList.remove('animate-completion-pulse');
+          }, 800);
+        }, 1800);
 
-      }, 50);
+      }, 100);
     };
 
     // Use requestAnimationFrame to ensure smooth transitions without visible resets

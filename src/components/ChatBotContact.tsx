@@ -216,7 +216,7 @@ const ChatBotContact: React.FC = () => {
     if (currentStep === 'initial') {
       initializeChat();
     }
-  }, []);
+  }, [currentStep, initializeChat]);
 
   useEffect(() => {
     if (inputRef.current && currentStep !== 'success') {
@@ -240,7 +240,7 @@ const ChatBotContact: React.FC = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">Chat with us</h3>
-            <p className="text-sm text-gray-400">We'd love to hear from you</p>
+            <p className="text-sm text-gray-400">We&apos;d love to hear from you</p>
           </div>
         </div>
       </motion.div>

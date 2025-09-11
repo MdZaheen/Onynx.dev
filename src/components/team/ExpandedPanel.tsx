@@ -5,11 +5,11 @@ import Image from 'next/image'
 import { TeamMember } from '@/data/team'
 
 interface ExpandedPanelProps {
-  member: TeamMember
-  isVisible: boolean
+  member: TeamMember;
+  isVisible: boolean;
 }
 
-const ExpandedPanel = memo<ExpandedPanelProps>(({ member, isVisible }) => {
+const ExpandedPanel = memo<ExpandedPanelProps>(({ member }) => {
   return (
     <div className="mt-4">
       <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden transition-all duration-300 ease-out">

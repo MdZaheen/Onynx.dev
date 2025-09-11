@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import styles from '@/styles/Navbar.module.css';
 
 export default function Navbar() {

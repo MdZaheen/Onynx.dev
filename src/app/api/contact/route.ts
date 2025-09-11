@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     // Email service implementation
     if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
       try {
-        const transporter = nodemailer.createTransporter({
+        const transporter = nodemailer.createTransport({
           service: 'gmail',
           auth: {
             user: process.env.EMAIL_USER,

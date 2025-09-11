@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import TeamSection from '../TeamSection'
@@ -5,10 +6,10 @@ import TeamSection from '../TeamSection'
 // Mock framer-motion to avoid animation issues in tests
 jest.mock('framer-motion', () => ({
   motion: {
-    div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
-    button: ({ children, ...props }: any) => <button {...props}>{children}</button>,
+div: ({ children, ...props }: React.ComponentPropsWithoutRef<'div'>) => <div {...props}>{children}</div>,
+button: ({ children, ...props }: React.ComponentPropsWithoutRef<'button'>) => <button {...props}>{children}</button>,
   },
-  AnimatePresence: ({ children }: any) => children,
+AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
 }))
 
 // Mock the team data

@@ -50,7 +50,7 @@ const ProjectSecrets: React.FC<ProjectSecretsProps> = ({ project, index, isLeft 
       transition: {
         duration: 0.8,
         delay: index * 0.2 + 0.1,
-        ease: "easeOut"
+      ease: [0.04, 0.62, 0.23, 0.98] as [number, number, number, number]
       }
     }
   };
@@ -61,7 +61,7 @@ const ProjectSecrets: React.FC<ProjectSecretsProps> = ({ project, index, isLeft 
       width: 180,
       transition: { 
         duration: 0.4, 
-        ease: "easeInOut",
+        ease: [0.645, 0.045, 0.355, 1] as [number, number, number, number],
         staggerChildren: 0.1
       }
     },
@@ -70,7 +70,7 @@ const ProjectSecrets: React.FC<ProjectSecretsProps> = ({ project, index, isLeft 
       width: 320,
       transition: { 
         duration: 0.5, 
-        ease: "easeOut",
+        ease: [0.04, 0.62, 0.23, 0.98] as [number, number, number, number],
         staggerChildren: 0.1,
         delayChildren: 0.1
       }
@@ -156,7 +156,7 @@ const ProjectSecrets: React.FC<ProjectSecretsProps> = ({ project, index, isLeft 
               transition={{ 
                 duration: 2, 
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: [0.645, 0.045, 0.355, 1]
               }}
             >
               <HelpCircle className="w-16 h-16 text-red-400" style={{ color: '#A10000' }} />

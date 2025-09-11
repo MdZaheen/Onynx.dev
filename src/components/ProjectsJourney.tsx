@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, AnimatePresence, cubicBezier } from 'framer-motion';
 import { projectsData, ProjectData } from '@/data/projects';
 import { ChevronDown, ExternalLink, Github, Play, Calendar, Users, Code2 } from 'lucide-react';
 import ProjectSecrets from './ProjectSecrets';
@@ -21,17 +21,31 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isLeft }) => 
   const cardVariants = {
     hidden: {
       opacity: 0,
-      x: isLeft ? -100 : 100,
-      y: 50
+      x: isLeft ? -150 : 150,
+      y: 80,
+      rotateY: isLeft ? -15 : 15,
+      scale: 0.9
     },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
+      rotateY: 0,
+      scale: 1,
       transition: {
-        duration: 0.8,
-        delay: index * 0.2,
-        ease: "easeOut"
+        stiffness: 100,
+        damping: 12,
+        delay: index * 0.15,
+      }
+    },
+    hover: {
+      scale: 1.05,
+      rotateY: isLeft ? -2 : 2,
+      z: 50,
+      boxShadow: "0 20px 40px rgba(161, 0, 0, 0.15)",
+      transition: {
+        stiffness: 300,
+        damping: 20
       }
     }
   };
@@ -40,12 +54,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, isLeft }) => 
     collapsed: {
       height: 0,
       opacity: 0,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: cubicBezier(0.25, 0.46, 0.45, 0.94) }
     },
     expanded: {
       height: "auto",
       opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut" }
+      transition: { duration: 0.5, ease: cubicBezier(0.25, 0.46, 0.45, 0.94) }
     }
   };
 
@@ -320,17 +334,77 @@ const ProjectsJourney: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10 pt-20">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 80, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ 
+            duration: 1,
+            type: "spring",
+            stiffness: 100,
+            damping: 15
+          }}
           className="text-center mb-20"
         >
-          <h2 className="text-5xl md:text-7xl font-bold mb-6" style={{ fontFamily: 'var(--font-lexend)' }}>
-            Project <span className="text-red-500" style={{ color: '#A10000' }}>Journey</span>
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+          <motion.h2 
+            className="text-5xl md:text-7xl font-bold mb-6" 
+            style={{ fontFamily: 'var(--font-lexend)' }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            <motion.span
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              Project 
+            </motion.span>
+            <motion.span 
+              className="text-red-500" 
+              style={{ color: '#A10000' }}
+              initial={{ opacity: 0, x: 20, textShadow: "none" }}
+              whileInView={{ 
+                opacity: 1, 
+                x: 0,
+                textShadow: "0 0 20px rgba(161, 0, 0, 0.3)"
+              }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              Journey
+            </motion.span>
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-400 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+          >
             Follow our development story through innovative projects that push the boundaries of technology
-          </p>
+          </motion.p>
+          
+          {/* Decorative Elements */}
+          <motion.div
+            className="flex justify-center items-center mt-8 space-x-2"
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="w-2 h-2 rounded-full bg-red-500"
+                style={{ backgroundColor: '#A10000' }}
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: i * 0.3
+                }}
+              />
+            ))}
+          </motion.div>
         </motion.div>
 
         {/* Timeline Container */}
